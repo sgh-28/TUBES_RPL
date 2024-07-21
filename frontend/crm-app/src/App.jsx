@@ -1,13 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
-import Login from './pages/home/Login';
+import Pelayan from './pages/Pelayan/Pelayan';
+
 
 const routes = (
   <Router>
     <Routes>
       <Route path='/dashboard' exact element={<Home />} />
-      <Route path='/login' exact element={<Login />} />
+      <Route path='/pelayan' exact element={<Pelayan />} />
     </Routes>
   </Router>
 );

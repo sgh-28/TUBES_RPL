@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useMeja } from "../pages/reservasi/MejaProvider";
 
 function DetailMeja() {
@@ -37,12 +38,12 @@ function DetailMeja() {
                     >
                         Ubah Status!
                     </button>
-                    <button
-                        // onClick={handleStatusChange}
+                    <Link
+                        to={'/menu'}
                         className="bg-slate-300 px-20 py-3 hover:bg-slate-400 text-slate-800 text-lg rounded-lg transition-all duration-300"
                     >
                         Pesan !
-                    </button>
+                    </Link>
                 </>
 
             }

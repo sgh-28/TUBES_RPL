@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+
 const Meja = require('./models/Meja');
+const User = require('./models/User');
+
+const SECRET_KEY = process.env.SECRET_KEY || crypto.randomBytes(64).toString('hex');
+
+const blacklist = new Set();
 
 module.exports = () =>{
     router.get('/meja', async (req, res) => {
@@ -29,6 +37,33 @@ module.exports = () =>{
       
     router.get('/reservasi', (req, res) => {
         res.send('Reservations');
+    });
+
+    router.post('/login', async (req, res) => {
+        const { NIP, Password } = req.body;
+
+        // Find user by NIP
+        const user = await User.findOne({ NIP });
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid NIP or password' });
+        }
+
+        // Compare passwords (plain text)
+        if (user.Password !== Password) {
+            return res.status(401).json({ message: 'Invalid NIP or password' });
+        }
+
+        // Generate JWT token
+        const token = jwt.sign({ id: user._id, role: user.Role, nama: user.Nama }, SECRET_KEY, { expiresIn: '1h' });
+
+        res.json({ token });
+    });
+
+    router.post('/logout', (req, res) => {
+        const token = req.headers.authorization.split(' ')[1];
+        blacklist.add(token);
+        res.status(200).json({ message: 'Logged out successfully' });
     });
 
     return router;

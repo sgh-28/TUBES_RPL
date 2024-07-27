@@ -1,4 +1,5 @@
-import React from 'react'
+// App.jsx
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Pelayan from './pages/pelayan/Reservasi';
@@ -10,27 +11,52 @@ import KaryawanAdmin from './pages/admin/KaryawanAdmin';
 import MejaAdmin from './pages/admin/MejaAdmin';
 import MenuAdmin from './pages/admin/MenuAdmin';
 import Error from './error';
-
-
-const routes = (
-  <Router>
-    <Routes>
-      <Route path='/' exact element={<LandingPage />} />
-      <Route path='/dashboard' exact element={<Home />} />
-      <Route path='/login' exact element={<Login/>} />
-      <Route path='/pelayan/reservasi' exact element={<Pelayan />} />
-      <Route path='/pelayan/menu' exact element={<Menu/>} />
-      <Route path='/admin/' exact element={<HomeAdmin/>} />
-      <Route path='/admin/karyawan' exact element={<KaryawanAdmin/>} />
-      <Route path='/admin/menu' exact element={<MenuAdmin/>} />
-      <Route path='/admin/meja' exact element={<MejaAdmin/>} />
-      <Route path='*' element={<Error />} /> 
-    </Routes>
-  </Router>
-);
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
-  return <div>{routes}</div>
-}
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' exact element={<LandingPage />} />
+        <Route path='/dashboard' exact element={<Home />} />
+        <Route path='/login' exact element={<Login />} />
+        
+        <Route 
+          path='/pelayan/reservasi' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<Pelayan />} />} 
+        />
+        <Route 
+          path='/pelayan/menu' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<Menu />} />} 
+        />
+        
+        <Route 
+          path='/admin/' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<HomeAdmin />} />} 
+        />
+        <Route 
+          path='/admin/karyawan' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<KaryawanAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<MenuAdmin />} />} 
+        />
+        <Route 
+          path='/admin/meja' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<MejaAdmin />} />} 
+        />
 
-export default App
+        <Route path='*' element={<Error />} /> 
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

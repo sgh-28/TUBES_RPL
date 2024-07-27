@@ -1,17 +1,26 @@
 const express = require('express');
 const mongoose = require('./db');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+
 const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SECRET_KEY = process.env.SECRET_KEY || crypto.randomBytes(64).toString('hex');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+      const token = authHeader.split(' ')[1];
+      if (blacklist.has(token)) {
+          return res.status(401).json({ message: 'Token is blacklisted' });
+      }
+  }
+  next();
+});
 
 
 app.use('/api', routes());

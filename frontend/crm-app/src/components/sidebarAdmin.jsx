@@ -1,15 +1,11 @@
 import React from 'react'
 import { Link, useLocation, useNavigate} from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 function SidebarAdmin() {
     const location = useLocation();
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        // Handle logout functionality here
-        // alert('Logged out');
-        navigate('/');
-      };
+    const { logout } = useAuth();
 
     const getLinkClass = (path) => {
         return location.pathname === path ? 'button-primary-active' : 'button-primary';
@@ -44,7 +40,7 @@ function SidebarAdmin() {
             {renderLinks()}
         </div>
         <div className='flex flex-col px-6 py-12'>
-            <button className="button-primary text-start" onClick={handleLogout}>Logout</button>
+            <button className="button-primary text-start" onClick={logout}>Logout</button>
         </div>
     </div>
 

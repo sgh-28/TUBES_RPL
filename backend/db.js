@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const dbUri = 'mongodb://localhost:27017'; // Ganti dengan URI MongoDB Anda
+const dbUri = 'mongodb://localhost:27017/tubes-rpl'; // Ganti dengan URI MongoDB Anda
 
 mongoose.connect(dbUri)
   .then(() => {

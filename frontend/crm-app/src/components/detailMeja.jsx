@@ -12,7 +12,7 @@ function DetailMeja() {
     const handleStatusChange = () => {
         let status= '';
         {selectedMeja.status == 'kosong'?status='terisi':status='kosong'}
-        updateMejaStatus(selectedMeja.id, status);
+        updateMejaStatus(selectedMeja._id, status);
       };
 
     return (
@@ -22,7 +22,7 @@ function DetailMeja() {
                 <p>Kapasitas: {selectedMeja.kapasitas} Orang</p>
                 <p>Status: {selectedMeja.status === 'kosong' ? 'Kosong' : 'Terisi'}</p>
             </div>
-            <img src={`./${selectedMeja.kapasitas == 2?pathimage ='meja2.png':pathimage='meja4.png'}`} alt="meja" className={`${pathimage === 'meja2.png' ? 'max-w-32' : 'max-w-72'}`} />
+            <img src={`../${selectedMeja.kapasitas == 2?pathimage ='meja2.png':pathimage='meja4.png'}`} alt="meja" className={`${pathimage === 'meja2.png' ? 'max-w-32' : 'max-w-72'}`} />
             {selectedMeja.status == 'kosong'?
                 <button
                     onClick={handleStatusChange}

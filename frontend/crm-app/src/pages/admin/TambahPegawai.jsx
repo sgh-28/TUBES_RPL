@@ -1,19 +1,20 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
 import SidebarAdmin from '../../components/sidebarAdmin'
+import { Link } from 'react-router-dom'
 
-function MejaAdmin() {
+function TambahPegawai() {
   return (
-    <div className='flex flex-col h-screen'>
+    <div className='flex flex-col h-screen w-full'>
         <Navbar/>
         <div className='flex h-full'>
             <SidebarAdmin/>
-            <div>
-                Manajemen Meja
+            <div className='flex flex-col w-[80%]'>
+
             </div>
         </div>
     </div>
   )
 }
 
-export default MejaAdmin
+export default TambahPegawai

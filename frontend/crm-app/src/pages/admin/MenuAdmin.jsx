@@ -9,7 +9,7 @@ function MenuAdmin() {
         <div className='flex h-full'>
             <SidebarAdmin/>
             <div>
-                Menu
+                Manajemen Menu
             </div>
         </div>
     </div>

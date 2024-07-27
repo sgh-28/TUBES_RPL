@@ -39,6 +39,11 @@ module.exports = () =>{
         res.send('Reservations');
     });
 
+    router.get('/users', async (req, res) => {
+        const data = await User.find().select('NIP Role Nama');;
+        res.json(data);
+    })
+
     router.post('/login', async (req, res) => {
         const { NIP, Password } = req.body;
 

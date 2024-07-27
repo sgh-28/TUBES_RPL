@@ -12,6 +12,7 @@ import MejaAdmin from './pages/admin/MejaAdmin';
 import MenuAdmin from './pages/admin/MenuAdmin';
 import Error from './error';
 import ProtectedRoute from './components/ProtectedRoute';
+import TambahPegawai from './pages/admin/TambahPegawai';
 
 const App = () => {
   return (
@@ -41,6 +42,11 @@ const App = () => {
           path='/admin/karyawan' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<KaryawanAdmin />} />} 
+        />
+        <Route 
+          path='/admin/karyawan/add' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<TambahPegawai />} />} 
         />
         <Route 
           path='/admin/menu' 

@@ -9,6 +9,10 @@ function SidebarAdmin() {
 
     const getLinkClass = (path) => {
         return location.pathname === path ? 'button-primary-active' : 'button-primary';
+      };
+    
+    const getParentLinkClass = (parentPath) => {
+    return location.pathname.startsWith(parentPath) ? 'button-primary-active' : 'button-primary';
     };
 
     const renderLinks = () => {
@@ -16,9 +20,9 @@ function SidebarAdmin() {
             return (
                 <>
                     <Link className={getLinkClass('/admin/')} to="/admin/">Beranda</Link>
-                    <Link className={getLinkClass('/admin/karyawan')} to="/admin/karyawan">Pegawai</Link>
-                    <Link className={getLinkClass('/admin/menu')} to="/admin/menu">Menu</Link>
-                    <Link className={getLinkClass('/admin/meja')} to="/admin/meja">Meja</Link>
+                    <Link className={getParentLinkClass('/admin/karyawan')} to="/admin/karyawan">Manajemen Pegawai</Link>
+                    <Link className={getLinkClass('/admin/menu')} to="/admin/menu">Manajemen Menu</Link>
+                    <Link className={getLinkClass('/admin/meja')} to="/admin/meja">Manajemen Meja</Link>
                 </>
             );
         } else if (location.pathname.startsWith('/pelayan')) {
@@ -35,7 +39,7 @@ function SidebarAdmin() {
     };
 
   return (
-    <div className="flex flex-col w-1/6 justify-between drop-shadow-lg bg-white">
+    <div className="flex flex-col w-1/5 justify-between drop-shadow-lg bg-white z-40">
         <div className='flex flex-col px-6 py-12 gap-4'> 
             {renderLinks()}
         </div>

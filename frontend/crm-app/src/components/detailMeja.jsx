@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useMeja } from "../pages/reservasi/MejaProvider";
+import { useMeja } from "../pages/pelayan/MejaProvider";
 
 function DetailMeja() {
     const { selectedMeja, updateMejaStatus } = useMeja();

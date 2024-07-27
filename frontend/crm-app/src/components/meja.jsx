@@ -1,5 +1,5 @@
 // import { useEffect, useState } from 'react'
-import { useMeja } from '../pages/reservasi/MejaProvider';
+import { useMeja } from '../pages/pelayan/MejaProvider';
 
 function Meja() {
     const { dataMeja, setSelectedMeja } = useMeja();

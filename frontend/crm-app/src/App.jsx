@@ -5,7 +5,6 @@ import Home from './pages/home/Home';
 import Pelayan from './pages/pelayan/Reservasi';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/login/Login';
-import Menu from './pages/pelayan/menu';
 import HomeAdmin from './pages/admin/HomeAdmin';
 import KaryawanAdmin from './pages/admin/KaryawanAdmin';
 import MejaAdmin from './pages/admin/MejaAdmin';
@@ -13,6 +12,11 @@ import MenuAdmin from './pages/admin/MenuAdmin';
 import Error from './error';
 import ProtectedRoute from './components/ProtectedRoute';
 import TambahPegawai from './pages/admin/TambahPegawai';
+import Appetizer from './pages/pelayan/Appetizer';
+import MainCourse from './pages/pelayan/MainCourse';
+import Dessert from './pages/pelayan/Dessert';
+import Drink from './pages/pelayan/Drink';
+import Sidedish from './pages/pelayan/Sidedish';
 
 const App = () => {
   return (
@@ -28,11 +32,31 @@ const App = () => {
           element={<ProtectedRoute allowedRoles={['pelayan']} element={<Pelayan />} />} 
         />
         <Route 
-          path='/pelayan/menu' 
+          path='/pelayan/appetizer' 
           exact 
-          element={<ProtectedRoute allowedRoles={['pelayan']} element={<Menu />} />} 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<Appetizer />} />} 
         />
-        
+        <Route 
+          path='/pelayan/main-course' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<MainCourse />} />} 
+        />
+        <Route 
+          path='/pelayan/dessert' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<Dessert />} />} 
+        />
+         <Route 
+          path='/pelayan/drink' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<Drink />} />} 
+        />
+         <Route 
+          path='/pelayan/side-dish' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<Sidedish />} />} 
+        />
+
         <Route 
           path='/admin/' 
           exact 

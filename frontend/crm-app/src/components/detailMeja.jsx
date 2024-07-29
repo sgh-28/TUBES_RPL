@@ -39,7 +39,7 @@ function DetailMeja() {
                         Ubah Status!
                     </button>
                     <Link
-                        to={'/pelayan/menu'}
+                        to={'/pelayan/appetizer'}
                         className="bg-slate-300 px-20 py-3 hover:bg-slate-400 text-slate-800 text-lg rounded-lg transition-all duration-300"
                     >
                         Pesan !

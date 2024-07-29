@@ -28,11 +28,11 @@ function SidebarAdmin() {
         } else if (location.pathname.startsWith('/pelayan')) {
             return (
                 <>
-                    <Link className={getLinkClass('/pelayan/menu/appetizer')} to="/pelayan/menu/appetizer">Appetizer</Link>
-                    <Link className={getLinkClass('/pelayan/menu/main-course')} to="/pelayan/menu/main-course">Main Course</Link>
-                    <Link className={getLinkClass('/pelayan/menu/dessert')} to="/pelayan/menu/dessert">Dessert</Link>
-                    <Link className={getLinkClass('/pelayan/menu/drink')} to="/pelayan/menu/drink">Drink</Link>
-                    <Link className={getLinkClass('/pelayan/menu/side-dish')} to="/pelayan/menu/side-dish">Side Dish</Link>
+                    <Link className={getLinkClass('/pelayan/appetizer')} to="/pelayan/appetizer">Appetizer</Link>
+                    <Link className={getLinkClass('/pelayan/main-course')} to="/pelayan/main-course">Main Course</Link>
+                    <Link className={getLinkClass('/pelayan/dessert')} to="/pelayan/dessert">Dessert</Link>
+                    <Link className={getLinkClass('/pelayan/drink')} to="/pelayan/drink">Drink</Link>
+                    <Link className={getLinkClass('/pelayan/side-dish')} to="/pelayan/side-dish">Side Dish</Link>
                 </>
             );
         }

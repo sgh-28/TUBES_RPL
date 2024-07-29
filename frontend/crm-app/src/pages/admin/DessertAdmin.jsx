@@ -1,10 +1,9 @@
 import React from 'react'
+import SidebarMenu from '../../components/sidebarMenu'
 import Navbar from '../../components/Navbar'
 import SidebarAdmin from '../../components/sidebarAdmin'
-import SidebarMenu from '../../components/sidebarMenu'
-import { Link } from 'react-router-dom'
 
-function MenuAdmin() {
+const DessertAdmin = () => {
   return (
     <div className='flex flex-col h-screen w-full'>
         <Navbar/>
@@ -20,7 +19,7 @@ function MenuAdmin() {
                     />
                     <Link className='bg-teal-600 text-slate-50 px-8 py-2 rounded-md' to={'/admin/menu/add'}>Tambah Menu</Link>
                 </div>
-                <div className='flex flex-col p-4 overflow-y-auto drop-shadow-lg'>
+                <div className='flex flex-col p-4 overflow-y-auto h-[90vh] drop-shadow-lg'>
                   <SidebarMenu/>
                 </div>
             </div>
@@ -29,4 +28,4 @@ function MenuAdmin() {
   )
 }
 
-export default MenuAdmin
+export default DessertAdmin

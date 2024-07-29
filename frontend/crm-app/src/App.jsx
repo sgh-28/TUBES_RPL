@@ -17,6 +17,11 @@ import MainCourse from './pages/pelayan/MainCourse';
 import Dessert from './pages/pelayan/Dessert';
 import Drink from './pages/pelayan/Drink';
 import Sidedish from './pages/pelayan/Sidedish';
+import AppetizerAdmin from './pages/admin/AppetizerAdmin';
+import MaincourseAdmin from './pages/admin/MaincourseAdmin';
+import DessertAdmin from './pages/admin/DessertAdmin';
+import DrinkAdmin from './pages/admin/DrinkAdmin';
+import SidedishAdmin from './pages/admin/SidedishAdmin';
 
 const App = () => {
   return (
@@ -76,6 +81,31 @@ const App = () => {
           path='/admin/menu' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MenuAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/appetizer' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/main-course' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<MaincourseAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/dessert' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<DessertAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/drink' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<DrinkAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/side-dish' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<SidedishAdmin />} />} 
         />
         <Route 
           path='/admin/meja' 

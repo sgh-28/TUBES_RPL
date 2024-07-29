@@ -3,18 +3,18 @@ import Navbar from '../../components/Navbar'
 import SidebarAdmin from '../../components/sidebarAdmin'
 
 
-function Menu() {
+const Dessert = () => {
   return (
-    <div className='w-full h-screen overflow-hidden flex flex-col'>
-        <Navbar />
+    <div className='flex flex-col h-screen'>
+        <Navbar/>
         <div className='flex h-full'>
             <SidebarAdmin/>
             <div>
-                Beranda
+                Dessert
             </div>
         </div>
     </div>
   )
 }
 
-export default Menu
+export default Dessert

@@ -10,7 +10,7 @@ function HomeAdmin() {
         <div className='flex h-full'>
             <SidebarAdmin/>
             <div>
-                Beranda
+                beranda
             </div>
         </div>
     </div>

@@ -40,7 +40,8 @@ function DetailMeja() {
                     </button>
                     <Link
                         to={'/pelayan/appetizer'}
-                        className="bg-slate-300 px-20 py-3 hover:bg-slate-400 text-slate-800 text-lg rounded-lg transition-all duration-300"
+                        className="bg-slate-300
+                         px-20 py-3 hover:bg-slate-400 text-slate-800 text-lg rounded-lg transition-all duration-300"
                     >
                         Pesan !
                     </Link>

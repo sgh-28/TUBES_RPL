@@ -35,6 +35,12 @@ function SidebarAdmin() {
                     <Link className={getLinkClass('/pelayan/side-dish')} to="/pelayan/side-dish">Side Dish</Link>
                 </>
             );
+        } else if (location.pathname.startsWith('/kasir/')){
+            return(
+                <>
+                    <Link className={getLinkClass('/kasir/meja1')} to="/kasir/meja1">Meja 1</Link>
+                </>
+            );
         }
     };
 

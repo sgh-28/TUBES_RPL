@@ -3,6 +3,8 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
+const Pelanggan = require('./models/Pelanggan');
+const Menu = require('./models/Menu');
 const Meja = require('./models/Meja');
 const User = require('./models/User');
 

@@ -115,7 +115,7 @@ const App = () => {
         />
 
         <Route 
-          path='/kasir' 
+          path='/kasir/' 
           exact 
           element={<ProtectedRoute allowedRoles={['kasir']} element={<Pembayaran />} />} 
         />

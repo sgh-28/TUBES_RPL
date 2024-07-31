@@ -15,6 +15,8 @@ const pelangganSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+},{collection: 'pelanggan',
+  versionKey: false
 });
 
 // Pre-save hook untuk mengatur no_pelanggan secara otomatis

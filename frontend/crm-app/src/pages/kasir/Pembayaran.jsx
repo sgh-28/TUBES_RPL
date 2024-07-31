@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../components/Navbar'
 import SidebarAdmin from '../../components/sidebarAdmin'
 
-function App() {
+function Pembayaran() {
   const [selectedTable, setSelectedTable] = useState(null);
 
   return (

@@ -61,7 +61,17 @@ module.exports = () =>{
     router.get('/users', async (req, res) => {
         const data = await User.find().select('NIP Role Nama');;
         res.json(data);
-    })
+    });
+
+    router.post('/users', async (req, res) => {
+        const { NIP, Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan } = req.body;
+        try{
+            const user = await User.insertMany([{NIP, Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan}]);
+            res.json(user);
+            }catch (error){
+                res.status(500).json({message: 'Failed post user'});
+            }
+    });
 
     router.post('/login', async (req, res) => {
         const { NIP, Password } = req.body;

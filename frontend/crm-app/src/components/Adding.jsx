@@ -12,7 +12,6 @@ const Adding = () => {
   const [pendidikanTerakhir, setPendidikanTerakhir] = useState('');
   const [kewarganegaraan, setKewarganegaraan] = useState('');
   const [password, setPassword] = useState('');
-  const [idAdmin] = useState('12345'); // Contoh ID admin (ini seharusnya didapat dari konteks aplikasi atau state)
 
   // Simulasi mendapatkan NIP otomatis dari database
   useEffect(() => {
@@ -29,11 +28,10 @@ const Adding = () => {
     fetchNip();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Lakukan pengiriman data form ke backend
-    console.log({
-      nip,
+    const employeeData = {
       nama,
       peran,
       jenisKelamin,
@@ -43,9 +41,28 @@ const Adding = () => {
       tahunMasuk,
       pendidikanTerakhir,
       kewarganegaraan,
-      password,
-      idAdmin
-    });
+      password
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/api/users', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(employeeData)
+      });
+
+      if (response.ok) {
+          const data = await response.json();
+          console.log('Pegawai berhasil ditambahkan', data);
+          // Reset form atau lakukan tindakan lain
+      } else {  
+          console.error('Terjadi kesalahan saat menambahkan pegawai');
+      }
+    } catch (error) {
+      console.error('Terjadi kesalahan jaringan', error);
+    }
   };
 
   return (

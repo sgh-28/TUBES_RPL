@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "66a53f6d80cc037a20d0624a"
+  },
+  "NIP": 1000001,
+  "Password": "password",
+  "Role": "admin",
+  "Nama": "Wahyudi"
+},
+{
+  "_id": {
+    "$oid": "66a53f7a80cc037a20d0624b"
+  },
+  "NIP": 1000002,
+  "Password": "password",
+  "Role": "pelayan",
+  "Nama": "Supriadi"
+}]

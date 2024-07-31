@@ -22,6 +22,7 @@ import MaincourseAdmin from './pages/admin/MaincourseAdmin';
 import DessertAdmin from './pages/admin/DessertAdmin';
 import DrinkAdmin from './pages/admin/DrinkAdmin';
 import SidedishAdmin from './pages/admin/SidedishAdmin';
+import Pembayaran from './pages/kasir/Pembayaran';
 
 const App = () => {
   return (
@@ -111,6 +112,12 @@ const App = () => {
           path='/admin/meja' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MejaAdmin />} />} 
+        />
+
+        <Route 
+          path='/kasir' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['kasir']} element={<Pembayaran />} />} 
         />
 
         <Route path='*' element={<Error />} /> 

@@ -35,6 +35,9 @@ const Navbar = () => {
     case '/admin/menu':
       pageTitle = 'Manajemen Menu';
       break;
+    case '/kasir/':
+      pageTitle = 'Pembayaran';
+      break;
     default:
       pageTitle = ' ';
   }

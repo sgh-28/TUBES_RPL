@@ -17,6 +17,13 @@ module.exports = () =>{
         // res.send('Meja');
     });
 
+    router.get('/meja:id', async (req, res) => {
+        const id = req.params;
+        const data = await Meja.find({_id: id});
+        res.json(data);
+        // res.send('Meja');
+    });
+
     router.put('/meja/:id', async (req, res) => {
         const { id } = req.params;
         const { status } = req.body;
@@ -28,6 +35,16 @@ module.exports = () =>{
             res.json(meja);
         } catch (error) {
             res.status(500).json({ message: 'Failed to update meja status' });
+        }
+    });
+
+    router.post('/meja', async (req, res) => {
+        const {_id, nama, status, kapasitas} = req.body;
+        try{
+            const meja = await Meja.insertMany([{_id, nama, status, kapasitas}]);
+            res.json(meja);
+        }catch (error){
+            res.status(500).json({message: 'Failed post meja'});
         }
     });
       

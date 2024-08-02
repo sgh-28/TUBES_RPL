@@ -23,6 +23,7 @@ import DessertAdmin from './pages/admin/DessertAdmin';
 import DrinkAdmin from './pages/admin/DrinkAdmin';
 import SidedishAdmin from './pages/admin/SidedishAdmin';
 import Pembayaran from './pages/kasir/Pembayaran';
+import TambahMenu from './pages/admin/TambahMenu';
 
 const App = () => {
   return (
@@ -83,6 +84,12 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MenuAdmin />} />} 
         />
+
+        <Route 
+          path='/admin/menu/add' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMenu/>} />} 
+        />
         <Route 
           path='/admin/menu/appetizer' 
           exact 
@@ -113,6 +120,7 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MejaAdmin />} />} 
         />
+
 
         <Route 
           path='/kasir/' 

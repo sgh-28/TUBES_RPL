@@ -15,4 +15,13 @@
   "Password": "password",
   "Role": "pelayan",
   "Nama": "Supriadi"
+},
+{
+  "_id":{
+    "$oid":"66a53f6d80cc037a20d0624a"
+  },
+  "NIP":1000003,
+  "Password":"password",
+  "Role":"kasir",
+  "nama":"ateng"
 }]

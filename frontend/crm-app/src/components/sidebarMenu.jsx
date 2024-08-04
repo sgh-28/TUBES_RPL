@@ -17,11 +17,9 @@ function SidebarAdmin() {
     const renderLinks = () => {
         return (
             <>
-                <Link className={getLinkClass('/admin/menu/appetizer')} to="/admin/menu/appetizer">Appetizer</Link>
-                <Link className={getLinkClass('/admin/menu/main-course')} to="/admin/menu/main-course">Main Course</Link>
+                <Link className={getLinkClass('/admin/menu/utama')} to="/admin/menu/utama">Makanan Utama</Link>
+                <Link className={getLinkClass('/admin/menu/cemilan')} to="/admin/menu/cemilan">Cemilan</Link>
                 <Link className={getLinkClass('/admin/menu/dessert')} to="/admin/menu/dessert">Dessert</Link>
-                <Link className={getLinkClass('/admin/menu/drink')} to="/admin/menu/drink">Drink</Link>
-                <Link className={getLinkClass('/admin/menu/side-dish')} to="/admin/menu/side-dish">Side Dish</Link>
             </>
         );
     };

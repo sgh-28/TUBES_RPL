@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 
 const Adding = () => {
   const [formData, setFormData] = useState({
-    nama: '',
-    peran: '',
-    jenisKelamin: '',
-    tanggalLahir: '',
-    alamat: '',
-    noTelepon: '',
-
-    tahunMasuk: '',
-
-    pendidikanTerakhir: '',
-    kewarganegaraan: '',
-    password: '',
+    Role: '',
+    Nama: '',
+    Password: '',
+    Tanggal_lahir: '',
+    Jenis_kelamin: '',
+    Alamat: '',
+    No_telp: '',
+    Tahun_masuk: 0,
+    Pend_terakhir: '',
+    kewarganegaraan: ''
   });
 
   const handleChange = (e) => {
@@ -28,7 +26,7 @@ const Adding = () => {
 
     try {
 
-      const response = await fetch('mongodb://localhost:27017/tubes-rpl', {
+      const response = await fetch('http://localhost:3000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,13 +40,12 @@ const Adding = () => {
       }
 
       const data = await response.json();
-      console.log('Pegawai berhasil ditambahkan', data);
+      alert('Pegawai berhasil ditambahkan');
+      // navigate('/admin/karyawan');
     } catch (error) {
-      console.error('Terjadi kesalahan:', error.message);
+      alert('Terjadi kesalahan:', error.message);
     }
   };
-
-
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md">
@@ -58,9 +55,9 @@ const Adding = () => {
           <label className="mb-1 text-gray-700" htmlFor="nama">Nama</label>
           <input
             type="text"
-            name="nama"
+            name="Nama"
             placeholder="Nama"
-            value={formData.nama}
+            value={formData.Nama}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           />
@@ -68,8 +65,8 @@ const Adding = () => {
         <div className="flex flex-col">
           <label className="mb-1 text-gray-700" htmlFor="peran">Peran</label>
           <select
-            name="peran"
-            value={formData.peran}
+            name="Role"
+            value={formData.Role}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           >
@@ -82,8 +79,8 @@ const Adding = () => {
         <div className="flex flex-col">
           <label className="mb-1 text-gray-700" htmlFor="jenisKelamin">Jenis Kelamin</label>
           <select
-            name="jenisKelamin"
-            value={formData.jenisKelamin}
+            name="Jenis_kelamin"
+            value={formData.Jenis_kelamin}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           >
@@ -96,8 +93,8 @@ const Adding = () => {
           <label className="mb-1 text-gray-700" htmlFor="tanggalLahir">Tanggal Lahir</label>
           <input
             type="date"
-            name="tanggalLahir"
-            value={formData.tanggalLahir}
+            name="Tanggal_lahir"
+            value={formData.Tanggal_lahir}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           />
@@ -106,9 +103,9 @@ const Adding = () => {
           <label className="mb-1 text-gray-700" htmlFor="alamat">Alamat</label>
           <input
             type="text"
-            name="alamat"
+            name="Alamat"
             placeholder="Alamat"
-            value={formData.alamat}
+            value={formData.Alamat}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           />
@@ -117,9 +114,9 @@ const Adding = () => {
           <label className="mb-1 text-gray-700" htmlFor="noTelepon">No Telepon</label>
           <input
             type="text"
-            name="noTelepon"
+            name="No_telp"
             placeholder="No Telepon"
-            value={formData.noTelepon}
+            value={formData.No_telp}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           />
@@ -128,9 +125,9 @@ const Adding = () => {
           <label className="mb-1 text-gray-700" htmlFor="tahunMasuk">Tahun Masuk</label>
           <input
             type="number"
-            name="tahunMasuk"
+            name="Tahun_masuk"
             placeholder="Tahun Masuk"
-            value={formData.tahunMasuk}
+            value={formData.Tahun_masuk}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           />
@@ -139,9 +136,9 @@ const Adding = () => {
           <label className="mb-1 text-gray-700" htmlFor="pendidikanTerakhir">Pendidikan Terakhir</label>
           <input
             type="text"
-            name="pendidikanTerakhir"
+            name="Pend_terakhir"
             placeholder="Pendidikan Terakhir"
-            value={formData.pendidikanTerakhir}
+            value={formData.Pend_terakhir}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           />
@@ -161,9 +158,9 @@ const Adding = () => {
           <label className="mb-1 text-gray-700" htmlFor="password">Password</label>
           <input
             type="password"
-            name="password"
+            name="Password"
             placeholder="Password"
-            value={formData.password}
+            value={formData.Password}
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2"
           />

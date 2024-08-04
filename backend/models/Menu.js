@@ -1,21 +1,22 @@
 const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost:27017/tubes-rpl', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 // Skema untuk Menu
 const menuSchema = new mongoose.Schema({
     id_menu: {
       type: String,
       unique: true,
-      required: true,
+      // required: true,
     },
-    nama_menu: {
+    status:{
       type: String,
       required: true,
     },
-    gambar_menu: {
-      type: String, // Asumsikan penyimpanan sebagai URL string
-      required: true,
-    },
-    bahan_bahan: {
+    nama_menu: {
       type: String,
       required: true,
     },
@@ -26,13 +27,8 @@ const menuSchema = new mongoose.Schema({
     jenis_menu: {
       type: String,
       required: true,
-      enum: ['Appetizer', 'Main Course', 'Dessert', 'Drink', 'Side Dish'], // Validasi jenis menu
-    },
-    ID_admin: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User', // Mengacu ke model Karyawan
-      required: true,
-    },
+      enum: ['Makanan utama', 'Cemilan', 'Minuman'], // Validasi jenis menu
+    }
   }, {collection: 'menu',
     versionKey: false
   });
@@ -44,20 +40,14 @@ const menuSchema = new mongoose.Schema({
         // Menentukan prefix berdasarkan jenis_menu
         let prefix = '';
         switch (this.jenis_menu) {
-          case 'Appetizer':
-            prefix = 'A';
+          case 'Menu utama':
+            prefix = 'MU';
             break;
-          case 'Main Course':
-            prefix = 'MC';
+          case 'Cemilan':
+            prefix = 'CM';
             break;
-          case 'Dessert':
-            prefix = 'D';
-            break;
-          case 'Drink':
-            prefix = 'DR';
-            break;
-          case 'Side Dish':
-            prefix = 'SD';
+          case 'Minuman':
+            prefix = 'MN';
             break;
           default:
             return next(new Error('Jenis menu tidak valid'));

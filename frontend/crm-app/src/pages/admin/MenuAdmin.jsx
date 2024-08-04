@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar'
 import SidebarAdmin from '../../components/sidebarAdmin'
 import SidebarMenu from '../../components/sidebarMenu'
 import { Link } from 'react-router-dom'
+import CardMenu from '../../components/cardMenu'
 
 function MenuAdmin() {
   return (
@@ -23,6 +24,7 @@ function MenuAdmin() {
                 <div className='flex flex-col p-4 overflow-y-auto drop-shadow-lg'>
                   <SidebarMenu/>
                 </div>
+                <CardMenu/>
             </div>
         </div>
     </div>

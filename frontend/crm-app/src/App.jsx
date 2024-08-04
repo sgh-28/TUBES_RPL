@@ -17,14 +17,15 @@ import MainCourse from './pages/pelayan/MainCourse';
 import Dessert from './pages/pelayan/Dessert';
 import Drink from './pages/pelayan/Drink';
 import Sidedish from './pages/pelayan/Sidedish';
-import AppetizerAdmin from './pages/admin/AppetizerAdmin';
-import MaincourseAdmin from './pages/admin/MaincourseAdmin';
-import DessertAdmin from './pages/admin/DessertAdmin';
-import DrinkAdmin from './pages/admin/DrinkAdmin';
-import SidedishAdmin from './pages/admin/SidedishAdmin';
+// import AppetizerAdmin from './pages/admin/AppetizerAdmin';
+// import MaincourseAdmin from './pages/admin/MaincourseAdmin';
+// import DessertAdmin from './pages/admin/DessertAdmin';
+// import DrinkAdmin from './pages/admin/DrinkAdmin';
+// import SidedishAdmin from './pages/admin/SidedishAdmin';
 import Pembayaran from './pages/kasir/Pembayaran';
 import TambahMenu from './pages/admin/TambahMenu';
 import TambahMeja from './pages/admin/TambahMeja';
+import HomeKoki from './pages/koki/homeKoki';
 
 const App = () => {
   return (
@@ -97,7 +98,22 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMenu/>} />} 
         />
+        {/* <Route 
+          path='/admin/menu/utama' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        />
         <Route 
+          path='/admin/menu/cemilan' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/minuman' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        /> */}
+        {/* <Route 
           path='/admin/menu/appetizer' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
@@ -121,7 +137,7 @@ const App = () => {
           path='/admin/menu/side-dish' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<SidedishAdmin />} />} 
-        />
+        /> */}
         <Route 
           path='/admin/meja' 
           exact 
@@ -141,6 +157,12 @@ const App = () => {
           path='/kasir/' 
           exact 
           element={<ProtectedRoute allowedRoles={['kasir']} element={<Pembayaran />} />} 
+        />
+
+        <Route 
+          path='/koki/' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['koki']} element={<HomeKoki />} />} 
         />
 
         <Route path='*' element={<Error />} /> 

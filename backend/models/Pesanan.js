@@ -5,45 +5,33 @@ const pesananSchema = new mongoose.Schema({
   no_pesanan: {
     type: String,
     unique: true,
-    required: true,
+    
   },
   tanggal_pesanan: {
     type: Date,
     required: true,
     default: Date.now,
   },
-  nama_menu: {
-    type: String,
-    required: true,
-  },
-  kuantitas_menu: {
+  
+  total_harga: {
     type: Number,
-    required: true,
-  },
-  harga_satuan_menu: {
-    type: Number,
-    required: true,
+    
   },
   id_menu: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'Menu',
     required: true,
   },
   no_meja: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     ref: 'Meja',
     required: true,
   },
-  no_pelanggan: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Pelanggan',
-    required: true,
-  },
   NIP: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     ref: 'User',
     required: true,
-  },
+  }
 });
 
 // Pre-save hook untuk mengatur no_pesanan secara otomatis

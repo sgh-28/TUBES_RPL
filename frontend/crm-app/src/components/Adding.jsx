@@ -8,7 +8,9 @@ const Adding = () => {
     tanggalLahir: '',
     alamat: '',
     noTelepon: '',
-    tahunMasuk:'',
+
+    tahunMasuk: '',
+
     pendidikanTerakhir: '',
     kewarganegaraan: '',
     password: '',
@@ -20,30 +22,32 @@ const Adding = () => {
       [e.target.name]: e.target.value,
     });
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:3000/api/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Network response was not ok');
-        }
+      const response = await fetch('mongodb://localhost:27017/tubes-rpl', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-        const data = await response.json();
-        console.log('Pegawai berhasil ditambahkan', data);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Pegawai berhasil ditambahkan', data);
     } catch (error) {
-        console.error('Terjadi kesalahan:', error.message);
+      console.error('Terjadi kesalahan:', error.message);
     }
-};
+  };
+
 
 
   return (

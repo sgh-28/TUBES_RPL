@@ -78,9 +78,9 @@ const AddingMenu = () => {
             className="border border-gray-300 rounded-md p-2"
           >
             <option value="">Pilih Jenis Menu</option>
-            <option value="utama">Makanan Utama</option>
-            <option value="cemilan">Cemilan</option>
-            <option value="minuman">Minuman</option>
+            <option value="Makanan utama">Makanan Utama</option>
+            <option value="Cemilan">Cemilan</option>
+            <option value="Minuman">Minuman</option>
           </select>
         </div>
         
@@ -93,8 +93,8 @@ const AddingMenu = () => {
             className="border border-gray-300 rounded-md p-2"
           >
             <option value="">Pilih Status Menu</option>
-            <option value="tersedia">Tersedia</option>
-            <option value="kosong">Kosong</option>
+            <option value="Tersedia">Tersedia</option>
+            <option value="Kosong">Kosong</option>
           </select>
         </div>
         <button type="submit" className="bg-teal-600 text-white px-4 py-2 rounded-md">

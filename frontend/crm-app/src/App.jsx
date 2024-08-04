@@ -24,6 +24,7 @@ import DrinkAdmin from './pages/admin/DrinkAdmin';
 import SidedishAdmin from './pages/admin/SidedishAdmin';
 import Pembayaran from './pages/kasir/Pembayaran';
 import TambahMenu from './pages/admin/TambahMenu';
+import TambahMeja from './pages/admin/TambahMeja';
 
 const App = () => {
   return (
@@ -126,6 +127,14 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MejaAdmin />} />} 
         />
+
+        <Route 
+          path='/admin/meja/add' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMeja />} />} 
+        />
+
+
 
 
         <Route 

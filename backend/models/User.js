@@ -53,7 +53,7 @@ app.post('/api/users', async (req, res) => {
         res.status(201).json({ message: 'Pegawai berhasil ditambahkan', user: newUser });
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ message: 'Terjadi kesalahan', error });
+        res.status(500).json({ message: 'Terjadi kesalahan', error: error.message });
     }
 });
 

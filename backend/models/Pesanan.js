@@ -12,18 +12,11 @@ const pesananSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  // nama_menu: {
-  //   type: String,
-  //   required: true,
-  // },
-  // kuantitas_menu: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // harga_satuan_menu: {
-  //   type: Number,
-  //   required: true,
-  // },
+  
+  total_harga: {
+    type: Number,
+    
+  },
   id_menu: {
     type: String,
     ref: 'Menu',

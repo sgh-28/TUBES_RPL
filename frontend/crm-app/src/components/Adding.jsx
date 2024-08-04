@@ -41,6 +41,7 @@ const Adding = () => {
 
       const data = await response.json();
       alert('Pegawai berhasil ditambahkan');
+      // navigate('/admin/karyawan');
     } catch (error) {
       alert('Terjadi kesalahan:', error.message);
     }

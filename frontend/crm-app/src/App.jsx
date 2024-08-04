@@ -73,10 +73,16 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<KaryawanAdmin />} />} 
         />
-        <Route 
+        {/* <Route 
           path='/admin/karyawan/add' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<TambahPegawai />} />} 
+        /> */}
+        <Route
+        path='/admin/karyawan/add'
+        exact
+        element={<ProtectedRoute allowedRoles={['admin']}
+        element={<TambahPegawai />} />}
         />
         <Route 
           path='/admin/menu' 

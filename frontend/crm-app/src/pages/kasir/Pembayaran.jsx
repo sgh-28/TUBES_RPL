@@ -3,18 +3,18 @@ import Navbar from '../../components/Navbar'
 import SidebarAdmin from '../../components/sidebarAdmin'
 
 function Pembayaran() {
-  const [selectedTable, setSelectedTable] = useState(null);
+  // const [selectedTable, setSelectedTable] = useState(null);
 
   return (
-    <div className="flex">
-      <Navbar />
-      <SidebarAdmin setSelectedTable={setSelectedTable} />
-      <div className="flex-1 p-4">
-        {selectedTable ? (
+    <div className='flex flex-col h-screen w-full'>
+        <Navbar/>
+        <div className='flex h-full'>
+            <SidebarAdmin/>
+        {/* {selectedTable ? (
           <OrderDetails tableId={selectedTable} />
         ) : (
           <div>Select a table to view order details.</div>
-        )}
+        )} */}
       </div>
     </div>
   );

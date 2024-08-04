@@ -1,208 +1,172 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const Adding = () => {
-  const [nip, setNip] = useState('');
-  const [nama, setNama] = useState('');
-  const [peran, setPeran] = useState('');
-  const [jenisKelamin, setJenisKelamin] = useState('');
-  const [tanggalLahir, setTanggalLahir] = useState('');
-  const [alamat, setAlamat] = useState('');
-  const [noTelepon, setNoTelepon] = useState('');
-  const [tahunMasuk, setTahunMasuk] = useState('');
-  const [pendidikanTerakhir, setPendidikanTerakhir] = useState('');
-  const [kewarganegaraan, setKewarganegaraan] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    nama: '',
+    peran: '',
+    jenisKelamin: '',
+    tanggalLahir: '',
+    alamat: '',
+    noTelepon: '',
+    tahunMasuk:'',
+    pendidikanTerakhir: '',
+    kewarganegaraan: '',
+    password: '',
+  });
 
-  // Simulasi mendapatkan NIP otomatis dari database
-  useEffect(() => {
-    const fetchNip = async () => {
-      // Panggilan API ke backend untuk mendapatkan NIP
-      // Misalnya: const response = await fetch('/api/get-nip');
-      // const data = await response.json();
-      // setNip(data.nip);
-
-      // Untuk sekarang, kita akan gunakan nilai dummy
-      setNip('20240730');
-    };
-
-    fetchNip();
-  }, []);
-
-  const handleSubmit = async(e) => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lakukan pengiriman data form ke backend
-    const employeeData = {
-      nama,
-      peran,
-      jenisKelamin,
-      tanggalLahir,
-      alamat,
-      noTelepon,
-      tahunMasuk,
-      pendidikanTerakhir,
-      kewarganegaraan,
-      password
-    };
 
     try {
       const response = await fetch('http://localhost:3000/api/users', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(employeeData)
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-          const data = await response.json();
-          console.log('Pegawai berhasil ditambahkan', data);
-          // Reset form atau lakukan tindakan lain
-      } else {  
-          console.error('Terjadi kesalahan saat menambahkan pegawai');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
+
+      const data = await response.json();
+      console.log('Pegawai berhasil ditambahkan', data);
     } catch (error) {
-      console.error('Terjadi kesalahan jaringan', error);
+      console.error('Terjadi kesalahan', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className='p-4 space-y-4'>
-      <div className='flex flex-col'>
-        <label className='font-medium'>NIP (Otomatis)</label>
-        <input
-          type='text'
-          value={nip}
-          readOnly
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Nama Pegawai</label>
-        <input
-          type='text'
-          value={nama}
-          onChange={(e) => setNama(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Peran</label>
-        <select
-          value={peran}
-          onChange={(e) => setPeran(e.target.value)}
-          className='border p-2 rounded-md'
-        >
-          <option value=''>Pilih Peran</option>
-          <option value='kasir'>Kasir</option>
-          <option value='pelayan'>Pelayan</option>
-          <option value='koki'>Koki</option>
-        </select>
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Jenis Kelamin</label>
-        <div className='flex items-center space-x-4'>
-          <label>
-            <input
-              type='radio'
-              name='jenisKelamin'
-              value='pria'
-              checked={jenisKelamin === 'pria'}
-              onChange={(e) => setJenisKelamin(e.target.value)}
-              className='mr-2'
-            />
-            Pria
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='jenisKelamin'
-              value='wanita'
-              checked={jenisKelamin === 'wanita'}
-              onChange={(e) => setJenisKelamin(e.target.value)}
-              className='mr-2'
-            />
-            Wanita
-          </label>
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-6">Tambah Pegawai</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="nama">Nama</label>
+          <input
+            type="text"
+            name="nama"
+            placeholder="Nama"
+            value={formData.nama}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
         </div>
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Tanggal Lahir</label>
-        <input
-          type='date'
-          value={tanggalLahir}
-          onChange={(e) => setTanggalLahir(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Alamat</label>
-        <input
-          type='text'
-          value={alamat}
-          onChange={(e) => setAlamat(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>No Telepon</label>
-        <input
-          type='text'
-          value={noTelepon}
-          onChange={(e) => setNoTelepon(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Tahun Masuk</label>
-        <input
-          type='text'
-          value={tahunMasuk}
-          onChange={(e) => setTahunMasuk(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Pendidikan Terakhir</label>
-        <input
-          type='text'
-          value={pendidikanTerakhir}
-          onChange={(e) => setPendidikanTerakhir(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Kewarganegaraan</label>
-        <input
-          type='text'
-          value={kewarganegaraan}
-          onChange={(e) => setKewarganegaraan(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <div className='flex flex-col'>
-        <label className='font-medium'>Password</label>
-        <input
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className='border p-2 rounded-md'
-        />
-      </div>
-
-      <button type='submit' className='bg-teal-600 text-white px-4 py-2 rounded-md'>
-        Simpan
-      </button>
-    </form>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="peran">Peran</label>
+          <select
+            name="peran"
+            value={formData.peran}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          >
+            <option value="">Pilih Peran</option>
+            <option value="kasir">Kasir</option>
+            <option value="koki">Koki</option>
+            <option value="pelayan">Pelayan</option>
+          </select>
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="jenisKelamin">Jenis Kelamin</label>
+          <select
+            name="jenisKelamin"
+            value={formData.jenisKelamin}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          >
+            <option value="">Pilih Jenis Kelamin</option>
+            <option value="Pria">Pria</option>
+            <option value="Wanita">Wanita</option>
+          </select>
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="tanggalLahir">Tanggal Lahir</label>
+          <input
+            type="date"
+            name="tanggalLahir"
+            value={formData.tanggalLahir}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="alamat">Alamat</label>
+          <input
+            type="text"
+            name="alamat"
+            placeholder="Alamat"
+            value={formData.alamat}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="noTelepon">No Telepon</label>
+          <input
+            type="text"
+            name="noTelepon"
+            placeholder="No Telepon"
+            value={formData.noTelepon}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="tahunMasuk">Tahun Masuk</label>
+          <input
+            type="number"
+            name="tahunMasuk"
+            placeholder="Tahun Masuk"
+            value={formData.tahunMasuk}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="pendidikanTerakhir">Pendidikan Terakhir</label>
+          <input
+            type="text"
+            name="pendidikanTerakhir"
+            placeholder="Pendidikan Terakhir"
+            value={formData.pendidikanTerakhir}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="kewarganegaraan">Kewarganegaraan</label>
+          <input
+            type="text"
+            name="kewarganegaraan"
+            placeholder="Kewarganegaraan"
+            value={formData.kewarganegaraan}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 text-gray-700" htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </div>
+        <button type="submit" className="bg-teal-600 text-white px-4 py-2 rounded-md">
+          Tambah Pegawai
+        </button>
+      </form>
+    </div>
   );
 };
 

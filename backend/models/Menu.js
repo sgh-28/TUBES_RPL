@@ -15,6 +15,7 @@ const menuSchema = new mongoose.Schema({
     status:{
       type: String,
       required: true,
+      enum: ['Tersedia', 'Kosong']
     },
     nama_menu: {
       type: String,
@@ -40,7 +41,7 @@ const menuSchema = new mongoose.Schema({
         // Menentukan prefix berdasarkan jenis_menu
         let prefix = '';
         switch (this.jenis_menu) {
-          case 'Menu utama':
+          case 'Makanan utama':
             prefix = 'MU';
             break;
           case 'Cemilan':

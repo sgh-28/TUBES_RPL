@@ -119,6 +119,16 @@ module.exports = () =>{
         // res.send('Meja');
     });
 
+    router.get('/menu/category/:category', async (req, res) => {
+      const category = req.params.category;
+      try {
+          const menus = await Menu.find({ jenis_menu: category });
+          res.json(menus);
+      } catch (error) {
+          res.status(500).json({ message: 'Failed to fetch menu items by category', error });
+      }
+  });
+
     router.put('/menu/:id_menu', async (req, res) => {
         const id  = req.params.id_menu;
         const { nama_menu, harga_menu, jenis_menu, status } = req.body;

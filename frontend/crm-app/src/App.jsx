@@ -25,6 +25,7 @@ import Sidedish from './pages/pelayan/Sidedish';
 import Pembayaran from './pages/kasir/Pembayaran';
 import TambahMenu from './pages/admin/TambahMenu';
 import TambahMeja from './pages/admin/TambahMeja';
+import HomeKoki from './pages/koki/homeKoki';
 
 const App = () => {
   return (
@@ -156,6 +157,12 @@ const App = () => {
           path='/kasir/' 
           exact 
           element={<ProtectedRoute allowedRoles={['kasir']} element={<Pembayaran />} />} 
+        />
+
+        <Route 
+          path='/koki/' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['koki']} element={<HomeKoki />} />} 
         />
 
         <Route path='*' element={<Error />} /> 

@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
-const Pelanggan = require('./models/Pelanggan');
 const Menu = require('./models/Menu');
 const Meja = require('./models/Meja');
 const User = require('./models/User');
@@ -142,7 +141,7 @@ module.exports = () =>{
 
     router.get('/pesanan', async (req, res) => {
         try {
-          const pesanans = await Pesanan.find().populate('id_menu no_meja no_pelanggan NIP');
+          const pesanans = await Pesanan.find().populate('id_menu no_meja NIP');
           res.json(pesanans);
         } catch (error) {
           res.status(500).json({ message: error.message });
@@ -152,7 +151,7 @@ module.exports = () =>{
       // Mendapatkan pesanan berdasarkan ID
       router.get('/pesanan/:id', async (req, res) => {
         try {
-          const pesanan = await Pesanan.findById(req.params.id).populate('id_menu no_meja no_pelanggan NIP');
+          const pesanan = await Pesanan.findById(req.params.id).populate('id_menu no_meja NIP');
           if (!pesanan) {
             return res.status(404).json({ message: 'Pesanan not found' });
           }
@@ -164,11 +163,10 @@ module.exports = () =>{
       
       // Membuat pesanan baru
       router.post('/pesanan', async (req, res) => {
-        const { id_menu, no_meja, no_pelanggan, NIP } = req.body;
+        const { id_menu, no_meja, NIP } = req.body;
         const pesanan = new Pesanan({
           id_menu,
           no_meja,
-          no_pelanggan,
           NIP,
         });
       
@@ -184,13 +182,22 @@ module.exports = () =>{
       router.patch('/pesanan/:id', async (req, res) => {
         const updates = req.body;
         try {
-          const pesanan = await Pesanan.findByIdAndUpdate(req.params.id, updates, { new: true }).populate('id_menu no_meja no_pelanggan NIP');
+          const pesanan = await Pesanan.findByIdAndUpdate(req.params.id, updates, { new: true }).populate('id_menu no_meja  NIP');
           if (!pesanan) {
             return res.status(404).json({ message: 'Pesanan not found' });
           }
           res.json(pesanan);
         } catch (error) {
           res.status(400).json({ message: error.message });
+        }
+      });
+
+      router.get('/pesanan', async (req, res) => {
+        try {
+          const pesanan = await Pesanan.find().populate('id_menu').populate('no_meja').populate('NIP');
+          res.json(pesanan);
+        } catch (error) {
+          res.status(500).json({ message: 'pesanan not found' });
         }
       });
 

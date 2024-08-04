@@ -9,12 +9,14 @@ const AddingMenu = () => {
       });
     
       const handleChange = (e) => {
-        setFormDataMenu({
-          ...formDataMenu,
-          [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+        setFormDataMenu(prevState => ({
+          ...prevState,
+          [name]: name === 'harga_menu' ? Number(value) : value,
+        }));
       };
-    
+      
+
       const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -58,12 +60,13 @@ const AddingMenu = () => {
         <div className='flex flex-col'>
           <label className="mb-1 text-gray-700" htmlFor='harga'>Harga Menu</label>
           <input 
-          type="text" 
+          type="number"
           name="harga_menu"
           placeholder='Harga Menu'
           value={formDataMenu.harga_menu}
           onChange={handleChange}
           className='border border-gray-300 rounded-md p-2'/>
+
         </div>
 
         <div className='flex flex-col'>

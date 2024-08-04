@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost:27017/tubes-rpl', {
 const userSchema = new mongoose.Schema({
     NIP: { type: Number, unique: true },
     Password: { type: String, required: true },
-    Role: { type: String, required: true },
+    Role: { type: String, required: true, enum:['kasir','koki','pelayan'] },
     Nama: { type: String, required: true },
     Jenis_kelamin: {type: String, required: true, enum:['Pria','Wanita']},
     Tanggal_lahir: {type: String, required: true},
@@ -48,15 +48,15 @@ app.post('/api/users', async (req, res) => {
             Pend_terakhir: pendidikanTerakhir,
             kewarganegaraan: kewarganegaraan,
             Tahun_masuk: tahunMasuk,
-
-            // Add other fields here
         });
         await newUser.save();
         res.status(201).json({ message: 'Pegawai berhasil ditambahkan', user: newUser });
     } catch (error) {
+        console.error('Error:', error);
         res.status(500).json({ message: 'Terjadi kesalahan', error });
     }
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -12,6 +12,10 @@ const menuSchema = new mongoose.Schema({
       unique: true,
       // required: true,
     },
+    status:{
+      type: String,
+      required: true,
+    },
     nama_menu: {
       type: String,
       required: true,

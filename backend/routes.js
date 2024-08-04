@@ -7,6 +7,7 @@ const Pelanggan = require('./models/Pelanggan');
 const Menu = require('./models/Menu');
 const Meja = require('./models/Meja');
 const User = require('./models/User');
+const Pesanan = require('./models/Pesanan');
 
 const SECRET_KEY = process.env.SECRET_KEY || crypto.randomBytes(64).toString('hex');
 
@@ -93,12 +94,12 @@ module.exports = () =>{
     });
 
     router.post('/menu', async (req, res) => {
-        const {nama_menu, harga_menu, jenis_menu } = req.body;
+        const {nama_menu, harga_menu, jenis_menu, status } = req.body;
         try{
-            const menu = await Menu.create([{nama_menu, harga_menu, jenis_menu}]);
+            const menu = await Menu.create([{nama_menu, harga_menu, jenis_menu, status}]);
             res.json(menu);
             }catch (error){
-                res.status(500).json({message: 'Failed post menu'});
+                res.status(500).json({message: 'Failed post menu',error});
             }
     });
 
@@ -111,13 +112,13 @@ module.exports = () =>{
 
     router.put('/menu/:id_menu', async (req, res) => {
         const id  = req.params.id_menu;
-        const { nama_menu, harga_menu, jenis_menu } = req.body;
+        const { nama_menu, harga_menu, jenis_menu, status } = req.body;
         console.log(id,nama_menu, harga_menu, jenis_menu)
         try {
             // const menu = await Menu.find({id_menu : id}).updateOne({nama_menu, harga_menu, jenis_menu});
             const menu = await Menu.findOneAndUpdate(
                 { id_menu: id },
-                { nama_menu, harga_menu, jenis_menu },
+                { nama_menu, harga_menu, jenis_menu, status},
                 { new: true }
             );
             if (!menu) {
@@ -128,6 +129,60 @@ module.exports = () =>{
             res.status(500).json({ message: 'Failed to update menu status' });
         }
     });
+
+    router.get('/pesanan', async (req, res) => {
+        try {
+          const pesanans = await Pesanan.find().populate('id_menu no_meja no_pelanggan NIP');
+          res.json(pesanans);
+        } catch (error) {
+          res.status(500).json({ message: error.message });
+        }
+      });
+      
+      // Mendapatkan pesanan berdasarkan ID
+      router.get('/pesanan/:id', async (req, res) => {
+        try {
+          const pesanan = await Pesanan.findById(req.params.id).populate('id_menu no_meja no_pelanggan NIP');
+          if (!pesanan) {
+            return res.status(404).json({ message: 'Pesanan not found' });
+          }
+          res.json(pesanan);
+        } catch (error) {
+          res.status(500).json({ message: error.message });
+        }
+      });
+      
+      // Membuat pesanan baru
+      router.post('/pesanan', async (req, res) => {
+        const { id_menu, no_meja, no_pelanggan, NIP } = req.body;
+        const pesanan = new Pesanan({
+          id_menu,
+          no_meja,
+          no_pelanggan,
+          NIP,
+        });
+      
+        try {
+          const newPesanan = await pesanan.save();
+          res.status(201).json(newPesanan);
+        } catch (error) {
+          res.status(400).json({ message: error.message });
+        }
+      });
+      
+      // Memperbarui pesanan
+      router.patch('/pesanan/:id', async (req, res) => {
+        const updates = req.body;
+        try {
+          const pesanan = await Pesanan.findByIdAndUpdate(req.params.id, updates, { new: true }).populate('id_menu no_meja no_pelanggan NIP');
+          if (!pesanan) {
+            return res.status(404).json({ message: 'Pesanan not found' });
+          }
+          res.json(pesanan);
+        } catch (error) {
+          res.status(400).json({ message: error.message });
+        }
+      });
 
     router.post('/login', async (req, res) => {
         const { NIP, Password } = req.body;

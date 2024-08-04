@@ -73,6 +73,32 @@ module.exports = () =>{
             }
     });
 
+    router.get('/menu', async (req, res) => {
+        const data = await Menu.find().select();;
+        res.json(data);
+    });
+
+    router.get('/menu:id', async (req, res) => {
+        const id = req.params;
+        const data = await Menu.find({_id: id});
+        res.json(data);
+        // res.send('Meja');
+    });
+
+    router.put('/menu/:id', async (req, res) => {
+        const { id } = req.params;
+        const { status } = req.body;
+        try {
+            const menu = await Menu.findByIdAndUpdate(id, { status: status }, { new: true });
+            if (!menu) {
+                return res.status(404).json({ message: 'Menu not found' });
+            }
+            res.json(menu);
+        } catch (error) {
+            res.status(500).json({ message: 'Failed to update menu status' });
+        }
+    });
+
     router.post('/login', async (req, res) => {
         const { NIP, Password } = req.body;
 

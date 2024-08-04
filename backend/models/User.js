@@ -34,33 +34,27 @@ userSchema.plugin(AutoIncrement, { inc_field: 'NIP', start_seq: 100002 });
 
 const User = mongoose.model('User', userSchema);
 
-app.post('/api/users', async (req, res) => {
-    try {
-        const { nama, peran, jenisKelamin, tanggalLahir, alamat, noTelepon, tahunMasuk, pendidikanTerakhir, kewarganegaraan, password} = req.body;
-        const newUser = new User({
-            Password: password,
-            Role: peran,
-            Nama: nama,
-            Jenis_kelamin: jenisKelamin,
-            Tanggal_lahir: tanggalLahir,
-            Alamat: alamat,
-            No_telp: noTelepon,
-            Pend_terakhir: pendidikanTerakhir,
-            kewarganegaraan: kewarganegaraan,
-            Tahun_masuk: tahunMasuk,
-        });
-        await newUser.save();
-        res.status(201).json({ message: 'Pegawai berhasil ditambahkan', user: newUser });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ message: 'Terjadi kesalahan', error: error.message });
-    }
-});
-
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// app.post('/api/users', async (req, res) => {
+//     try {
+//         const { nama, peran, jenisKelamin, tanggalLahir, alamat, noTelepon, tahunMasuk, pendidikanTerakhir, kewarganegaraan, password} = req.body;
+//         const newUser = new User({
+//             Password: password,
+//             Role: peran,
+//             Nama: nama,
+//             Jenis_kelamin: jenisKelamin,
+//             Tanggal_lahir: tanggalLahir,
+//             Alamat: alamat,
+//             No_telp: noTelepon,
+//             Pend_terakhir: pendidikanTerakhir,
+//             kewarganegaraan: kewarganegaraan,
+//             Tahun_masuk: tahunMasuk,
+//         });
+//         await newUser.save();
+//         res.status(201).json({ message: 'Pegawai berhasil ditambahkan', user: newUser });
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ message: 'Terjadi kesalahan', error: error.message });
+//     }
+// });
 
 module.exports = User;

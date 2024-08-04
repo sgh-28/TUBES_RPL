@@ -17,7 +17,7 @@ import MainCourse from './pages/pelayan/MainCourse';
 import Dessert from './pages/pelayan/Dessert';
 import Drink from './pages/pelayan/Drink';
 import Sidedish from './pages/pelayan/Sidedish';
-import AppetizerAdmin from './pages/admin/AppetizerAdmin';
+// import AppetizerAdmin from './pages/admin/AppetizerAdmin';
 // import MaincourseAdmin from './pages/admin/MaincourseAdmin';
 // import DessertAdmin from './pages/admin/DessertAdmin';
 // import DrinkAdmin from './pages/admin/DrinkAdmin';
@@ -97,7 +97,7 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMenu/>} />} 
         />
-        <Route 
+        {/* <Route 
           path='/admin/menu/utama' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
@@ -111,7 +111,7 @@ const App = () => {
           path='/admin/menu/minuman' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
-        />
+        /> */}
         {/* <Route 
           path='/admin/menu/appetizer' 
           exact 

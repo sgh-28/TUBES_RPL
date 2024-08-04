@@ -40,9 +40,9 @@ const Adding = () => {
       }
 
       const data = await response.json();
-      console.log('Pegawai berhasil ditambahkan', data);
+      alert('Pegawai berhasil ditambahkan');
     } catch (error) {
-      console.error('Terjadi kesalahan:', error.message);
+      alert('Terjadi kesalahan:', error.message);
     }
   };
 

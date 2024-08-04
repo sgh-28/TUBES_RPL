@@ -11,10 +11,10 @@ function TambahPegawai() {
         <div className='flex h-full'>
             <SidebarAdmin/>
             <div className='flex flex-col w-[80%]'>
-              <div className='flex justify-between drop-shadow-sm bg-white p-4 items-center'>
+              {/* <div className='flex justify-between drop-shadow-sm bg-white p-4 items-center'>
                 <h2 className='text-xl font-medium'>Pendaftaran Pegawai</h2>
                 <Link className='bg-teal-600 text-slate-50 px-8 py-2 rounded-md' to={'/admin/karyawan'}>Simpan Pegawai</Link>
-              </div>
+              </div> */}
               <Adding/>
             </div>
         </div>

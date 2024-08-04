@@ -50,6 +50,16 @@ module.exports = () =>{
             res.status(500).json({message: 'Failed post meja', error});
         }
     });
+
+    // router.get('/meja/next-id', async (req, res) => {
+    //     try {
+    //       const lastMeja = await Meja.findOne().sort({ _id: -1 });
+    //       const nextId = lastMeja ? lastMeja._id + 1 : 1;
+    //       res.json({ nextId });
+    //     } catch (error) {
+    //       res.status(500).json({ message: 'Failed to fetch the next ID' });
+    //     }
+    //   });
       
     router.get('/pesanan/ongoing', (req, res) => {
         res.send('Ongoing orders');
@@ -70,7 +80,7 @@ module.exports = () =>{
             const user = await User.create([{ Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan}]);
             res.json(user);
             }catch (error){
-                res.status(500).json({message: 'Failed post user'});
+                res.status(500).json({message: 'Failed post user', error});
             }
     });
 

@@ -19,7 +19,6 @@ const AddingMeja = () => {
         e.preventDefault();
     
         try {
-    
           const response = await fetch('http://localhost:3000/api/meja', {
             method: 'POST',
             headers: {
@@ -44,7 +43,7 @@ const AddingMeja = () => {
       <div className="p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold mb-6">Tambah Meja</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className='flex flex-col'>
+          {/* <div className='flex flex-col'>
             <label className="mb-1 text-gray-700" htmlFor='id'>ID</label>
             <input 
             type="text" 
@@ -53,7 +52,7 @@ const AddingMeja = () => {
             value={formDataMeja._id}
             onChange={handleChange}
             className='border border-gray-300 rounded-md p-2'/>
-          </div>
+          </div> */}
     
           <div className='flex flex-col'>
             <label className="mb-1 text-gray-700" htmlFor='nama'>Nama</label>

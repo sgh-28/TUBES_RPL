@@ -1,12 +1,5 @@
-const express = require('express');
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
 
 mongoose.connect('mongodb://localhost:27017/tubes-rpl', {
     useNewUrlParser: true,

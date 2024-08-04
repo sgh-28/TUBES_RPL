@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost:27017/tubes-rpl', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 // Skema untuk Menu
 const menuSchema = new mongoose.Schema({
     id_menu: {
       type: String,
       unique: true,
-      required: true,
+      // required: true,
     },
     nama_menu: {
       type: String,

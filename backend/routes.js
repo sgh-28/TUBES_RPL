@@ -19,15 +19,15 @@ module.exports = () =>{
         // res.send('Meja');
     });
 
-    router.get('/meja:id', async (req, res) => {
-        const id = req.params;
+    router.get('/meja/:id', async (req, res) => {
+        const id = req.params.id;
         const data = await Meja.find({_id: id});
         res.json(data);
         // res.send('Meja');
     });
 
-    router.put('/meja/:id', async (req, res) => {
-        const { id } = req.params;
+    router.patch('/meja/:id', async (req, res) => {
+        const id = req.params.id;
         const { status } = req.body;
         try {
             const meja = await Meja.findByIdAndUpdate(id, { status: status }, { new: true });
@@ -41,12 +41,12 @@ module.exports = () =>{
     });
 
     router.post('/meja', async (req, res) => {
-        const {_id, nama, status, kapasitas} = req.body;
+        const {nama, status, kapasitas} = req.body;
         try{
-            const meja = await Meja.insertMany([{_id, nama, status, kapasitas}]);
+            const meja = await Meja.create([{nama, status, kapasitas}]);
             res.json(meja);
         }catch (error){
-            res.status(500).json({message: 'Failed post meja'});
+            res.status(500).json({message: 'Failed post meja', error});
         }
     });
       
@@ -73,23 +73,53 @@ module.exports = () =>{
             }
     });
 
+    router.patch('/users/:id', async (req, res) => {
+        const id = req.params;
+        const { status } = req.body;
+        try {
+            const users = await User.findByIdAndUpdate(id, { status: status }, { new: true });
+            if (!users) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.json(users);
+        } catch (error) {
+            res.status(500).json({ message: 'Failed to update users status' });
+        }
+    });
+
     router.get('/menu', async (req, res) => {
         const data = await Menu.find().select();;
         res.json(data);
     });
 
-    router.get('/menu:id', async (req, res) => {
-        const id = req.params;
-        const data = await Menu.find({_id: id});
+    router.post('/menu', async (req, res) => {
+        const {nama_menu, harga_menu, jenis_menu } = req.body;
+        try{
+            const menu = await Menu.create([{nama_menu, harga_menu, jenis_menu}]);
+            res.json(menu);
+            }catch (error){
+                res.status(500).json({message: 'Failed post menu'});
+            }
+    });
+
+    router.get('/menu/:id_menu', async (req, res) => {
+        const id = req.params.id_menu;
+        const data = await Menu.find({id_menu : id});
         res.json(data);
         // res.send('Meja');
     });
 
-    router.put('/menu/:id', async (req, res) => {
-        const { id } = req.params;
-        const { status } = req.body;
+    router.put('/menu/:id_menu', async (req, res) => {
+        const id  = req.params.id_menu;
+        const { nama_menu, harga_menu, jenis_menu } = req.body;
+        console.log(id,nama_menu, harga_menu, jenis_menu)
         try {
-            const menu = await Menu.findByIdAndUpdate(id, { status: status }, { new: true });
+            // const menu = await Menu.find({id_menu : id}).updateOne({nama_menu, harga_menu, jenis_menu});
+            const menu = await Menu.findOneAndUpdate(
+                { id_menu: id },
+                { nama_menu, harga_menu, jenis_menu },
+                { new: true }
+            );
             if (!menu) {
                 return res.status(404).json({ message: 'Menu not found' });
             }

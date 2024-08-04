@@ -3,6 +3,8 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
+const Pelanggan = require('./models/Pelanggan');
+const Menu = require('./models/Menu');
 const Meja = require('./models/Meja');
 const User = require('./models/User');
 
@@ -13,6 +15,13 @@ const blacklist = new Set();
 module.exports = () =>{
     router.get('/meja', async (req, res) => {
         const data = await Meja.find();
+        res.json(data);
+        // res.send('Meja');
+    });
+
+    router.get('/meja:id', async (req, res) => {
+        const id = req.params;
+        const data = await Meja.find({_id: id});
         res.json(data);
         // res.send('Meja');
     });
@@ -30,6 +39,16 @@ module.exports = () =>{
             res.status(500).json({ message: 'Failed to update meja status' });
         }
     });
+
+    router.post('/meja', async (req, res) => {
+        const {_id, nama, status, kapasitas} = req.body;
+        try{
+            const meja = await Meja.insertMany([{_id, nama, status, kapasitas}]);
+            res.json(meja);
+        }catch (error){
+            res.status(500).json({message: 'Failed post meja'});
+        }
+    });
       
     router.get('/pesanan/ongoing', (req, res) => {
         res.send('Ongoing orders');
@@ -42,7 +61,17 @@ module.exports = () =>{
     router.get('/users', async (req, res) => {
         const data = await User.find().select('NIP Role Nama');;
         res.json(data);
-    })
+    });
+
+    router.post('/users', async (req, res) => {
+        const { Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan } = req.body;
+        try{
+            const user = await User.create([{ Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan}]);
+            res.json(user);
+            }catch (error){
+                res.status(500).json({message: 'Failed post user'});
+            }
+    });
 
     router.post('/login', async (req, res) => {
         const { NIP, Password } = req.body;

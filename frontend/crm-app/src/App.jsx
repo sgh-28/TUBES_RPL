@@ -17,6 +17,14 @@ import MainCourse from './pages/pelayan/MainCourse';
 import Dessert from './pages/pelayan/Dessert';
 import Drink from './pages/pelayan/Drink';
 import Sidedish from './pages/pelayan/Sidedish';
+import AppetizerAdmin from './pages/admin/AppetizerAdmin';
+import MaincourseAdmin from './pages/admin/MaincourseAdmin';
+import DessertAdmin from './pages/admin/DessertAdmin';
+import DrinkAdmin from './pages/admin/DrinkAdmin';
+import SidedishAdmin from './pages/admin/SidedishAdmin';
+import Pembayaran from './pages/kasir/Pembayaran';
+import TambahMenu from './pages/admin/TambahMenu';
+import TambahMeja from './pages/admin/TambahMeja';
 
 const App = () => {
   return (
@@ -67,20 +75,72 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<KaryawanAdmin />} />} 
         />
-        <Route 
+        {/* <Route 
           path='/admin/karyawan/add' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<TambahPegawai />} />} 
+        /> */}
+        <Route
+        path='/admin/karyawan/add'
+        exact
+        element={<ProtectedRoute allowedRoles={['admin']}
+        element={<TambahPegawai />} />}
         />
         <Route 
           path='/admin/menu' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MenuAdmin />} />} 
         />
+
+        <Route 
+          path='/admin/menu/add' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMenu/>} />} 
+        />
+        <Route 
+          path='/admin/menu/appetizer' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/main-course' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<MaincourseAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/dessert' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<DessertAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/drink' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<DrinkAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/side-dish' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<SidedishAdmin />} />} 
+        />
         <Route 
           path='/admin/meja' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MejaAdmin />} />} 
+        />
+
+        <Route 
+          path='/admin/meja/add' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMeja />} />} 
+        />
+
+
+
+
+        <Route 
+          path='/kasir/' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['kasir']} element={<Pembayaran />} />} 
         />
 
         <Route path='*' element={<Error />} /> 

@@ -32,6 +32,8 @@ function Login() {
               navigate('/pelayan/reservasi');
           } else if (user.role === 'admin') {
               navigate('/admin/');
+          } else if (user.role === 'kasir'){
+              navigate('/kasir/');
           }
       } else {
           alert(data.message);

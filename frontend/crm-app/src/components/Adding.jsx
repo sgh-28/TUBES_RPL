@@ -8,7 +8,9 @@ const Adding = () => {
     tanggalLahir: '',
     alamat: '',
     noTelepon: '',
+
     tahunMasuk: '',
+
     pendidikanTerakhir: '',
     kewarganegaraan: '',
     password: '',
@@ -25,6 +27,7 @@ const Adding = () => {
     e.preventDefault();
 
     try {
+
       const response = await fetch('mongodb://localhost:27017/tubes-rpl', {
         method: 'POST',
         headers: {
@@ -44,6 +47,7 @@ const Adding = () => {
       console.error('Terjadi kesalahan:', error.message);
     }
   };
+
 
 
   return (

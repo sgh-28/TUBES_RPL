@@ -27,6 +27,7 @@ import TambahMenu from './pages/admin/TambahMenu';
 import TambahMeja from './pages/admin/TambahMeja';
 import HomeKoki from './pages/koki/homeKoki';
 import MenuPelayan from './pages/pelayan/MenuPelayan';
+import MenuKoki from './pages/koki/menuKoki';
 
 const App = () => {
   return (
@@ -169,6 +170,11 @@ const App = () => {
           path='/koki/' 
           exact 
           element={<ProtectedRoute allowedRoles={['koki']} element={<HomeKoki />} />} 
+        />
+        <Route 
+          path='/koki/menu' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['koki']} element={<MenuKoki />} />} 
         />
 
         <Route path='*' element={<Error />} /> 

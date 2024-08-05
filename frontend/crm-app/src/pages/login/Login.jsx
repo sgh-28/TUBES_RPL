@@ -34,6 +34,8 @@ function Login() {
               navigate('/admin/');
           } else if (user.role === 'kasir'){
               navigate('/kasir/');
+          } else if (user.role === 'koki'){
+              navigate('/koki/');
           }
       } else {
           alert(data.message);

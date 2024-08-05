@@ -12,17 +12,22 @@ import MenuAdmin from './pages/admin/MenuAdmin';
 import Error from './error';
 import ProtectedRoute from './components/ProtectedRoute';
 import TambahPegawai from './pages/admin/TambahPegawai';
-import Appetizer from './pages/pelayan/Appetizer';
-import MainCourse from './pages/pelayan/MainCourse';
-import Dessert from './pages/pelayan/Dessert';
-import Drink from './pages/pelayan/Drink';
-import Sidedish from './pages/pelayan/Sidedish';
-import AppetizerAdmin from './pages/admin/AppetizerAdmin';
-import MaincourseAdmin from './pages/admin/MaincourseAdmin';
-import DessertAdmin from './pages/admin/DessertAdmin';
-import DrinkAdmin from './pages/admin/DrinkAdmin';
-import SidedishAdmin from './pages/admin/SidedishAdmin';
+// import Appetizer from './pages/pelayan/Appetizer';
+// import MainCourse from './pages/pelayan/MainCourse';
+// import Dessert from './pages/pelayan/Dessert';
+// import Drink from './pages/pelayan/Drink';
+// import Sidedish from './pages/pelayan/Sidedish';
+// import AppetizerAdmin from './pages/admin/AppetizerAdmin';
+// import MaincourseAdmin from './pages/admin/MaincourseAdmin';
+// import DessertAdmin from './pages/admin/DessertAdmin';
+// import DrinkAdmin from './pages/admin/DrinkAdmin';
+// import SidedishAdmin from './pages/admin/SidedishAdmin';
 import Pembayaran from './pages/kasir/Pembayaran';
+import TambahMenu from './pages/admin/TambahMenu';
+import TambahMeja from './pages/admin/TambahMeja';
+import HomeKoki from './pages/koki/homeKoki';
+import MenuPelayan from './pages/pelayan/MenuPelayan';
+import MenuKoki from './pages/koki/menuKoki';
 
 const App = () => {
   return (
@@ -38,6 +43,11 @@ const App = () => {
           element={<ProtectedRoute allowedRoles={['pelayan']} element={<Pelayan />} />} 
         />
         <Route 
+          path='/pelayan/menu' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<MenuPelayan />} />} 
+        />
+        {/* <Route 
           path='/pelayan/appetizer' 
           exact 
           element={<ProtectedRoute allowedRoles={['pelayan']} element={<Appetizer />} />} 
@@ -61,7 +71,7 @@ const App = () => {
           path='/pelayan/side-dish' 
           exact 
           element={<ProtectedRoute allowedRoles={['pelayan']} element={<Sidedish />} />} 
-        />
+        /> */}
 
         <Route 
           path='/admin/' 
@@ -89,7 +99,28 @@ const App = () => {
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<MenuAdmin />} />} 
         />
+
         <Route 
+          path='/admin/menu/add' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMenu/>} />} 
+        />
+        {/* <Route 
+          path='/admin/menu/utama' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/cemilan' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        />
+        <Route 
+          path='/admin/menu/minuman' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
+        /> */}
+        {/* <Route 
           path='/admin/menu/appetizer' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<AppetizerAdmin />} />} 
@@ -113,7 +144,7 @@ const App = () => {
           path='/admin/menu/side-dish' 
           exact 
           element={<ProtectedRoute allowedRoles={['admin']} element={<SidedishAdmin />} />} 
-        />
+        /> */}
         <Route 
           path='/admin/meja' 
           exact 
@@ -121,9 +152,29 @@ const App = () => {
         />
 
         <Route 
+          path='/admin/meja/add' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['admin']} element={<TambahMeja />} />} 
+        />
+
+
+
+
+        <Route 
           path='/kasir/' 
           exact 
           element={<ProtectedRoute allowedRoles={['kasir']} element={<Pembayaran />} />} 
+        />
+
+        <Route 
+          path='/koki/' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['koki']} element={<HomeKoki />} />} 
+        />
+        <Route 
+          path='/koki/menu' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['koki']} element={<MenuKoki />} />} 
         />
 
         <Route path='*' element={<Error />} /> 

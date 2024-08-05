@@ -5,7 +5,7 @@ import SidebarMenu from '../../components/sidebarMenu';
 import { Link } from 'react-router-dom';
 import CardMenu from '../../components/cardMenu';
 
-function MenuAdmin() {
+function MenuKoki() {
   // State to track active category
   const [activeCategory, setActiveCategory] = useState('Makanan utama'); // Default to 'utama'
 
@@ -22,10 +22,7 @@ function MenuAdmin() {
               className='outline-none border text-center focus:bg-slate-100 py-2 rounded-md px-8'
               placeholder='Cari Menu'
             />
-            <Link className='bg-teal-600 text-slate-50 px-8 py-2 rounded-md' to={'/admin/menu/add'}>
-              Tambah Menu
-            </Link>
-          </div>
+            </div>
           <div className='flex h-full'>
             <div className='flex flex-col w-1/5 bg-gray-100'>
               <SidebarMenu setActiveCategory={setActiveCategory} />
@@ -40,4 +37,4 @@ function MenuAdmin() {
   );
 }
 
-export default MenuAdmin;
+export default MenuKoki;

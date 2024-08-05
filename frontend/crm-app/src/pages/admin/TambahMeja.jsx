@@ -2,9 +2,10 @@ import React from 'react'
 import Navbar from '../../components/Navbar'
 import SidebarAdmin from '../../components/sidebarAdmin'
 import { Link } from 'react-router-dom'
-import Adding from '../../components/Adding'
+import AddingMeja from '../../components/AddingMeja'
 
-function TambahPegawai() {
+
+const TambahMeja = () => {
   return (
     <div className='flex flex-col h-screen w-full'>
         <Navbar/>
@@ -15,11 +16,11 @@ function TambahPegawai() {
                 <h2 className='text-xl font-medium'>Pendaftaran Pegawai</h2>
                 <Link className='bg-teal-600 text-slate-50 px-8 py-2 rounded-md' to={'/admin/karyawan'}>Simpan Pegawai</Link>
               </div> */}
-              <Adding/>
+              <AddingMeja/>
             </div>
         </div>
     </div>
   )
 }
 
-export default TambahPegawai
+export default TambahMeja

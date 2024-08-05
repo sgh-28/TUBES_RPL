@@ -26,7 +26,7 @@ module.exports = () =>{
         // res.send('Meja');
     });
 
-    router.patch('/meja/:id', async (req, res) => {
+    router.put('/meja/:id', async (req, res) => {
         const id = req.params.id;
         const { status } = req.body;
         try {
@@ -63,6 +63,8 @@ module.exports = () =>{
     router.get('/pesanan/ongoing', (req, res) => {
         res.send('Ongoing orders');
     });
+
+    
       
     router.get('/reservasi', (req, res) => {
         res.send('Reservations');
@@ -172,19 +174,38 @@ module.exports = () =>{
       });
       
       // Membuat pesanan baru
-      router.post('/pesanan', async (req, res) => {
-        const { id_menu, no_meja, NIP } = req.body;
-        const pesanan = new Pesanan({
-          id_menu,
-          no_meja,
-          NIP,
-        });
+      // router.post('/pesanan', async (req, res) => {
+      //   const { id_menu, no_meja, NIP } = req.body;
+      //   const pesanan = new Pesanan({
+      //     id_menu,
+      //     no_meja,
+      //     NIP,
+      //   });
       
+      //   try {
+      //     const newPesanan = await pesanan.save();
+      //     res.status(201).json(newPesanan);
+      //   } catch (error) {
+      //     res.status(400).json({ message: error.message });
+      //   }
+      // });
+
+      router.post('/pesanan', async (req, res) => {
         try {
-          const newPesanan = await pesanan.save();
-          res.status(201).json(newPesanan);
+          const { orders, no_meja, NIP } = req.body;
+      
+          const pesananBaru = new Pesanan({
+            tanggal_pesanan: new Date(),
+            total_harga: orders.reduce((total, order) => total + order.harga_menu * order.quantity, 0),
+            id_menu: orders.map(order => order.id_menu),
+            no_meja,
+            NIP
+          });
+      
+          await pesananBaru.save();
+          res.status(201).json({ message: 'Pesanan berhasil dibuat', pesanan: pesananBaru });
         } catch (error) {
-          res.status(400).json({ message: error.message });
+          res.status(500).json({ message: 'Terjadi kesalahan', error: error.message });
         }
       });
       

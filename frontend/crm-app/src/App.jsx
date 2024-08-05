@@ -12,11 +12,11 @@ import MenuAdmin from './pages/admin/MenuAdmin';
 import Error from './error';
 import ProtectedRoute from './components/ProtectedRoute';
 import TambahPegawai from './pages/admin/TambahPegawai';
-import Appetizer from './pages/pelayan/Appetizer';
-import MainCourse from './pages/pelayan/MainCourse';
-import Dessert from './pages/pelayan/Dessert';
-import Drink from './pages/pelayan/Drink';
-import Sidedish from './pages/pelayan/Sidedish';
+// import Appetizer from './pages/pelayan/Appetizer';
+// import MainCourse from './pages/pelayan/MainCourse';
+// import Dessert from './pages/pelayan/Dessert';
+// import Drink from './pages/pelayan/Drink';
+// import Sidedish from './pages/pelayan/Sidedish';
 // import AppetizerAdmin from './pages/admin/AppetizerAdmin';
 // import MaincourseAdmin from './pages/admin/MaincourseAdmin';
 // import DessertAdmin from './pages/admin/DessertAdmin';
@@ -26,6 +26,7 @@ import Pembayaran from './pages/kasir/Pembayaran';
 import TambahMenu from './pages/admin/TambahMenu';
 import TambahMeja from './pages/admin/TambahMeja';
 import HomeKoki from './pages/koki/homeKoki';
+import MenuPelayan from './pages/pelayan/MenuPelayan';
 
 const App = () => {
   return (
@@ -41,6 +42,11 @@ const App = () => {
           element={<ProtectedRoute allowedRoles={['pelayan']} element={<Pelayan />} />} 
         />
         <Route 
+          path='/pelayan/menu' 
+          exact 
+          element={<ProtectedRoute allowedRoles={['pelayan']} element={<MenuPelayan />} />} 
+        />
+        {/* <Route 
           path='/pelayan/appetizer' 
           exact 
           element={<ProtectedRoute allowedRoles={['pelayan']} element={<Appetizer />} />} 
@@ -64,7 +70,7 @@ const App = () => {
           path='/pelayan/side-dish' 
           exact 
           element={<ProtectedRoute allowedRoles={['pelayan']} element={<Sidedish />} />} 
-        />
+        /> */}
 
         <Route 
           path='/admin/' 

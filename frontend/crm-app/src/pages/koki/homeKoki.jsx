@@ -1,4 +1,6 @@
 import React from 'react';
+import Navbar from '../../components/Navbar';
+import SidebarAdmin from '../../components/sidebarAdmin';
 
 const HomeKoki = () => {
   // Example data, replace with data from your backend or state management
@@ -30,7 +32,12 @@ const HomeKoki = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '20px' }}>
+    <div className='flex flex-col h-screen w-full'>
+      <Navbar/>
+      <div className='flex h-full'>
+        <SidebarAdmin />
+        <div className='flex flex-col w-[80%]'>
+    {/* <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '20px' }}>
       {orders.map((order, index) => (
         <div key={index} style={{ flex: '1 0 300px', border: '1px solid #ccc', borderRadius: '8px', padding: '10px', backgroundColor: 'white' }}>
           <h2 style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>#{order.id} NO.meja: {order.tableNo}</h2>
@@ -44,7 +51,10 @@ const HomeKoki = () => {
             Proses
           </button>
         </div>
-      ))}
+      ))} */}
+    {/* </div> */}
+    </div>
+    </div>
     </div>
   );
 }

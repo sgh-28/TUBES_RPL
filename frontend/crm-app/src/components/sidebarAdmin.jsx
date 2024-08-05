@@ -58,6 +58,13 @@ function SidebarAdmin({ setActiveCategory }) {
           <Link className={getLinkClass('/kasir/meja1')} to="/kasir/meja1">Meja 1</Link>
         </>
       );
+    } else if (location.pathname.startsWith('/koki/')){
+      return(
+        <>
+          <Link className={getLinkClass('/koki/')} to="/koki/">Pesanan</Link>
+          <Link className={getLinkClass('/koki/menu')} to="/koki/menu">Menu</Link>
+        </>
+      );
     }
   };
 

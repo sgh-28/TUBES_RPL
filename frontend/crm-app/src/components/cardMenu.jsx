@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function CardMenu({ activeCategory, orderList, setOrderList }) {
   const [menu, setMenu] = useState([]);
   const [quantity, setQuantity] = useState({});
   const [availability, setAvailability] = useState({});
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getMenu = async () => {
     try {
@@ -65,6 +66,22 @@ function CardMenu({ activeCategory, orderList, setOrderList }) {
     }
   };
 
+  const handleDelete = async (id_menu) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/menu/${id_menu}`, {
+        method: 'DELETE',
+      });
+      
+      if (response.ok) {
+        setMenu((prevMenu) => prevMenu.filter((item) => item.id_menu !== id_menu));
+      } else {
+        console.error('Failed to delete menu item', error);
+      }
+    } catch (error) {
+      console.error('Failed to delete menu item', error);
+    }
+  };
+
   const isAdmin = location.pathname.startsWith("/admin");
   const isChef = location.pathname.startsWith("/koki");
 
@@ -86,7 +103,8 @@ function CardMenu({ activeCategory, orderList, setOrderList }) {
                 >
                   Edit
                 </Link>
-                <button className="bg-red-400 hover:bg-red-500 px-6 py-1 text-center rounded-md transition-all duration-300">
+                <button className="bg-red-400 hover:bg-red-500 px-6 py-1 text-center rounded-md transition-all duration-300"
+                onClick={() => handleDelete(item.id_menu)}>
                   Hapus
                 </button>
               </>

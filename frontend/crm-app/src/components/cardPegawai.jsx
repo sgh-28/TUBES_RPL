@@ -16,7 +16,7 @@ function CardPegawai() {
     },[]);
 
   return (
-    <div className='flex flex-col w-full h-auto'>
+    <div className='flex flex-col w-full h-96 overflow-y-scroll '>
         {pegawai.map((item, index)=>
             <div className='flex justify-between border bg-white p-3' key={index}>
                 <div className='flex flex-col px-4'>

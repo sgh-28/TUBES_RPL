@@ -151,6 +151,23 @@ module.exports = () =>{
         }
     });
 
+    router.delete('/menu/:id_menu', async (req, res) => {
+      const { id_menu } = req.params;
+    
+      try {
+        const result = await db.collection('menu').deleteOne({ id_menu: parseInt(id_menu) });
+    
+        if (result.deletedCount === 1) {
+          res.status(200).json({ message: 'Menu deleted successfully' });
+        } else {
+          res.status(404).json({ message: 'Menu not found' });
+        }
+      } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+      }
+    });
+    
+
     router.get('/pesanan', async (req, res) => {
         try {
           const pesanans = await Pesanan.find().populate('id_menu no_meja NIP');

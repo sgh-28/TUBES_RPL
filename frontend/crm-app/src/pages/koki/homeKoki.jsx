@@ -28,7 +28,67 @@ const HomeKoki = () => {
         { name: "New York Cheese Cake", quantity: 2 },
         { name: "Nasi Padang", quantity: 1 }
       ]
-    }
+    },
+    {
+      id: 3,
+      tableNo: 5,
+      quantity: 3,
+      items: [
+        { name: "Gado-Gado", quantity: 1 },
+        { name: "Es Americano", quantity: 1 },
+        { name: "Pancake", quantity: 1 }
+      ]
+    },
+    {
+      id: 4,
+      tableNo: 5,
+      quantity: 3,
+      items: [
+        { name: "Gado-Gado", quantity: 1 },
+        { name: "Es Americano", quantity: 1 },
+        { name: "Pancake", quantity: 1 }
+      ]
+    },
+    {
+      id: 5,
+      tableNo: 5,
+      quantity: 3,
+      items: [
+        { name: "Gado-Gado", quantity: 1 },
+        { name: "Es Americano", quantity: 1 },
+        { name: "Pancake", quantity: 1 }
+      ]
+    },
+    {
+      id: 6,
+      tableNo: 5,
+      quantity: 3,
+      items: [
+        { name: "Gado-Gado", quantity: 1 },
+        { name: "Es Americano", quantity: 1 },
+        { name: "Pancake", quantity: 1 }
+      ]
+    },
+    {
+      id: 7,
+      tableNo: 5,
+      quantity: 3,
+      items: [
+        { name: "Gado-Gado", quantity: 1 },
+        { name: "Es Americano", quantity: 1 },
+        { name: "Pancake", quantity: 1 }
+      ]
+    },
+    {
+      id: 8,
+      tableNo: 5,
+      quantity: 3,
+      items: [
+        { name: "Gado-Gado", quantity: 1 },
+        { name: "Es Americano", quantity: 1 },
+        { name: "Pancake", quantity: 1 }
+      ]
+    },
   ];
 
   return (
@@ -37,8 +97,8 @@ const HomeKoki = () => {
       <div className='flex h-full'>
         <SidebarAdmin />
         <div className='flex flex-col w-[80%]'>
-    {/* <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '20px' }}>
-      {orders.map((order, index) => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '20px' }}>
+      {/* {orders.map((order, index) => (
         <div key={index} style={{ flex: '1 0 300px', border: '1px solid #ccc', borderRadius: '8px', padding: '10px', backgroundColor: 'white' }}>
           <h2 style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>#{order.id} NO.meja: {order.tableNo}</h2>
           <p>Kuantitas: {order.quantity}</p>
@@ -52,7 +112,7 @@ const HomeKoki = () => {
           </button>
         </div>
       ))} */}
-    {/* </div> */}
+    </div>
     </div>
     </div>
     </div>

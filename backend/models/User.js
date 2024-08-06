@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     versionKey: false
 });
 
-userSchema.plugin(AutoIncrement, { inc_field: 'NIP', start_seq: 100002 });
+userSchema.plugin(AutoIncrement, { inc_field: 'NIP', start_seq: 100001 });
 
 const User = mongoose.model('User', userSchema);
 

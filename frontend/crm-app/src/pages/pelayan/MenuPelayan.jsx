@@ -10,9 +10,9 @@ function MenuPelayan() {
   const [orderList, setOrderList] = useState([]);
 
   return (
-    <div className='flex flex-col h-screen'>
+    <div className='flex flex-col h-screen overflow-hidden'>
       <Navbar />
-      <div className='flex h-full'>
+      <div className='flex' style={{ height: 'calc(100vh - 60px)' }}>
         <SidebarAdmin setActiveCategory={setActiveCategory} />
         <div className='flex-grow p-4 overflow-auto'>
           <div className='flex flex-col w-full h-full'>

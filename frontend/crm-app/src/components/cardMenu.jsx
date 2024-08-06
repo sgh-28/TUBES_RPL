@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function CardMenu({ activeCategory, orderList, setOrderList }) {
+function CardMenu({ activeCategory, orderList, setOrderList, query }) {
   const [menu, setMenu] = useState([]);
   const [quantity, setQuantity] = useState({});
   const [availability, setAvailability] = useState({});
+  const [filteredMenu, setFilteredMenu] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -27,9 +28,11 @@ function CardMenu({ activeCategory, orderList, setOrderList }) {
     getMenu();
   }, []);
 
-  const filteredMenu = menu.filter(
-    (item) => item.jenis_menu === activeCategory
-  );
+  
+
+  // const filteredMenu = menu.filter(
+  //   (item) => item.jenis_menu === activeCategory
+  // );
 
   const handleAddToOrder = (item) => {
     if (!quantity[item.id_menu] || quantity[item.id_menu] <= 0) {
@@ -67,6 +70,11 @@ function CardMenu({ activeCategory, orderList, setOrderList }) {
   };
 
   const handleDelete = async (id_menu) => {
+    const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus menu ini?");
+    if (!confirmDelete) {
+      return;
+    }
+
     try {
       const response = await fetch(`http://localhost:3000/api/menu/${id_menu}`, {
         method: 'DELETE',
@@ -74,6 +82,7 @@ function CardMenu({ activeCategory, orderList, setOrderList }) {
       
       if (response.ok) {
         setMenu((prevMenu) => prevMenu.filter((item) => item.id_menu !== id_menu));
+        alert(`Anda Berhasil Menghapus Menu Dengan ID: ${id_menu}`);
       } else {
         console.error('Failed to delete menu item', error);
       }
@@ -84,6 +93,30 @@ function CardMenu({ activeCategory, orderList, setOrderList }) {
 
   const isAdmin = location.pathname.startsWith("/admin");
   const isChef = location.pathname.startsWith("/koki");
+
+  useEffect(() => {
+    const filterMenu = () => {
+      const lowerCaseQuery = query.toLowerCase();
+      return menu.filter(
+        (item) =>
+          item.jenis_menu === activeCategory &&
+          (item.id_menu.toLowerCase().includes(lowerCaseQuery) ||
+            item.nama_menu.toLowerCase().includes(lowerCaseQuery) ||
+            item.harga_menu <= query )
+      );
+    };
+
+    const filterMenuCategory = () =>{
+      return menu.filter(
+        (item) =>
+          item.jenis_menu === activeCategory
+      );
+    }
+    if(isAdmin || isChef)
+      setFilteredMenu(filterMenu());
+    else
+      setFilteredMenu(filterMenuCategory());
+  }, [menu, activeCategory, query, isAdmin, isChef]);
 
   return (
     <div className="flex flex-col w-full h-auto">
@@ -109,7 +142,7 @@ function CardMenu({ activeCategory, orderList, setOrderList }) {
                 </button>
               </>
             ) : isChef ? (
-              <div className="flex items-center">
+              <div className="flex flex-col h-full items-center justify-center">
                 <button
                   className={`${
                     availability[item.id_menu] ? "bg-green-500" : "bg-red-500"

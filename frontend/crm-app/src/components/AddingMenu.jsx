@@ -16,11 +16,12 @@ const AddingMenu = () => {
       fetch(`http://localhost:3000/api/menu/${id}`)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setFormDataMenu({
-            nama_menu: data.nama_menu,
-            harga_menu: data.harga_menu,
-            jenis_menu: data.jenis_menu,
-            status: data.status,
+            nama_menu: data[0].nama_menu,
+            harga_menu: data[0].harga_menu,
+            jenis_menu: data[0].jenis_menu,
+            status: data[0].status,
           });
         })
         .catch((error) => {
@@ -103,8 +104,9 @@ const AddingMenu = () => {
             onChange={handleChange}
             className='border border-gray-300 rounded-md p-2'>
             <option value="">Pilih Kategori</option>
-            <option value="makanan">Makanan</option>
-            <option value="minuman">Minuman</option>
+            <option value="Makanan utama">Makanan Utama</option>
+            <option value="Minuman">Minuman</option>
+            <option value="Cemilan">Cemilan</option>
           </select>
         </div>
 

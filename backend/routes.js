@@ -28,9 +28,12 @@ module.exports = () =>{
 
     router.put('/meja/:id', async (req, res) => {
         const id = req.params.id;
-        const { status } = req.body;
+        const { nama, status, kapasitas } = req.body;
         try {
-            const meja = await Meja.findByIdAndUpdate(id, { status: status }, { new: true });
+            const meja = await Meja.findByIdAndUpdate(
+              { _id: id },
+              { nama, status, kapasitas},
+              { new: true });
             if (!meja) {
                 return res.status(404).json({ message: 'Meja not found' });
             }
@@ -38,6 +41,19 @@ module.exports = () =>{
         } catch (error) {
             res.status(500).json({ message: 'Failed to update meja status' });
         }
+    });
+
+    router.delete('/meja/:id', async (req, res) => {
+      const _id = req.params.id;
+      try {
+        const meja = await Meja.findByIdAndDelete(_id);
+        if (!meja) {
+          return res.status(404).json({ message: 'Meja not found' });
+          }
+          res.json(meja);
+          } catch (error) {
+            res.status(500).json({ message: 'Failed to delete meja' });
+          }
     });
 
     router.post('/meja', async (req, res) => {
@@ -75,6 +91,20 @@ module.exports = () =>{
         res.json(data);
     });
 
+    router.get('/users/:id', async (req, res) => {
+      const id = req.params.id;
+      try{
+        const user = await User.findOne({NIP:id});
+        if(!user){
+          return res.status(404).json({ message: 'User not found' });
+          }
+          res.json(user);
+      } catch(error){
+        res.status(500).json({message: 'Failed to get user', error});
+      }
+
+    });
+
     router.post('/users', async (req, res) => {
         const { Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan } = req.body;
         try{
@@ -98,6 +128,37 @@ module.exports = () =>{
             res.status(500).json({ message: 'Failed to update users status' });
         }
     });
+
+    router.put('/users/:id', async (req, res) => {
+      const id = req.params.id;
+      const { Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan } = req.body;
+      // console.log(id, Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan );
+      try {
+          const user = await User.findOneAndUpdate(
+            { NIP: parseInt(id) },
+            { Role, Nama, Password,Jenis_kelamin,Tanggal_lahir,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan},
+            { new: true });
+          if (!user) {
+              return res.status(404).json({ message: 'User not found' });
+          }
+          res.json(user);
+      } catch (error) {
+          res.status(500).json({ message: 'Failed to update user status', error});
+      }
+  });
+
+  router.delete('/users/:NIP', async (req, res) => {
+    const NIP = req.params.NIP;
+    try {
+      const user = await User.deleteOne({NIP});
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
+        } catch (error) {
+          res.status(500).json({ message: 'Failed to delete user' });
+        }
+  });
 
     router.get('/menu', async (req, res) => {
         const data = await Menu.find().select();;
@@ -152,10 +213,12 @@ module.exports = () =>{
     });
 
     router.delete('/menu/:id_menu', async (req, res) => {
-      const { id_menu } = req.params;
+      const id_menu = req.params.id_menu;
     
       try {
-        const result = await db.collection('menu').deleteOne({ id_menu: parseInt(id_menu) });
+        const result = await Menu.deleteOne({id_menu:id_menu});
+        console.log(result)
+        console.log(id_menu)
     
         if (result.deletedCount === 1) {
           res.status(200).json({ message: 'Menu deleted successfully' });
@@ -163,7 +226,7 @@ module.exports = () =>{
           res.status(404).json({ message: 'Menu not found' });
         }
       } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Server error', error});
       }
     });
     

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 function SidebarAdmin({ setActiveCategory }) {
+  const [selectedCategory, setSelectedCategory] = useState('Makanan utama');
   const location = useLocation();
   const { logout } = useAuth();
 
@@ -15,8 +16,12 @@ function SidebarAdmin({ setActiveCategory }) {
   };
 
   const handleCategoryChange = (category) => {
-    setActiveCategory(category); // Use prop to set the active category
-    console.log(`Active category changed to: ${category}`); // Log for debugging
+    setSelectedCategory(category); // Perbarui kategori aktif
+    setActiveCategory(category);
+  };
+
+  const getButtonClass = (category) => {
+    return selectedCategory === category ? 'button-primary-active' : 'button-primary';
   };
 
   const renderLinks = () => {
@@ -33,19 +38,19 @@ function SidebarAdmin({ setActiveCategory }) {
       return (
         <>
           <button
-            className='button-primary'
+            className={getButtonClass('Makanan utama')}
             onClick={() => handleCategoryChange('Makanan utama')}
           >
             Makanan Utama
           </button>
           <button
-            className='button-primary'
+            className={getButtonClass('Cemilan')}
             onClick={() => handleCategoryChange('Cemilan')}
           >
             Cemilan
           </button>
           <button
-            className='button-primary'
+            className={getButtonClass('Minuman')}
             onClick={() => handleCategoryChange('Minuman')}
           >
             Minuman

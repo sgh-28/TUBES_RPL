@@ -7,6 +7,9 @@ const Menu = require('./models/Menu');
 const Meja = require('./models/Meja');
 const User = require('./models/User');
 const Pesanan = require('./models/Pesanan');
+const { getTopMenus } = require('./models/topMenus');
+const { getRevenue } = require('./models/getRevenue');
+const { getTransactions } = require('./models/pesananbyMonth');
 
 const SECRET_KEY = process.env.SECRET_KEY || crypto.randomBytes(64).toString('hex');
 
@@ -280,7 +283,7 @@ module.exports = () =>{
             items: orders,
             no_meja,
             NIP,
-            status: "ongoing",
+            status: "berlangsung",
             jenis_pembayaran: ""
           });
 
@@ -327,6 +330,12 @@ module.exports = () =>{
           res.status(500).json({ message: 'pesanan not found' });
         }
       });
+
+      router.get('/pendapatan', getRevenue);
+
+      router.get('/topmenus', getTopMenus);
+
+      router.get('/transaksi', getTransactions);
 
     router.post('/login', async (req, res) => {
         const { NIP, Password } = req.body;

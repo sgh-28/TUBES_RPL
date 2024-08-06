@@ -110,11 +110,12 @@ function Pembayaran() {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-[60] min-w-[350px]"
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-[60] min-w-[400px]"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 z-50"
       >
         <h2 className='text-xl font-medium mb-4'>Tagihan Meja {selectedTable}</h2>
         <div className='flex flex-col gap-4'>
+          <div className={`${jenisPembayaran == 'cash'?"max-h-[200px]":"max-h-[350px]"} overflow-auto`}>
           {pesanan.map(pesanan => (
             <div key={pesanan.no_pesanan} className='border-b-2 pb-2'>
               <h3>Pesanan #{pesanan.no_pesanan}</h3>
@@ -127,6 +128,7 @@ function Pembayaran() {
               </ul>
             </div>
           ))}
+          </div>
           <h3>Total Harga: Rp. {totalHarga}</h3>
           <select value={jenisPembayaran} onChange={(e) => setJenisPembayaran(e.target.value)} className='py-3 border'>
             <option value="">Pilih Jenis Pembayaran</option>

@@ -22,7 +22,7 @@ function DetailMeja() {
                 <p>Kapasitas: {selectedMeja.kapasitas} Orang</p>
                 <p>Status: {selectedMeja.status === 'kosong' ? 'Kosong' : 'Terisi'}</p>
             </div>
-            <img src={`../${selectedMeja.kapasitas == 2?pathimage ='meja2.png':pathimage='meja4.png'}`} alt="meja" className={`${pathimage === 'meja2.png' ? 'max-w-32' : 'max-w-72'}`} />
+            <img src={`../${selectedMeja.kapasitas == 2?pathimage ='meja2.png':pathimage='meja4.png'}`} alt="meja" className={`${pathimage === 'meja2.png' ? 'w-20' : 'w-52'}`} />
             {selectedMeja.status == 'kosong'?
                 <button
                     onClick={handleStatusChange}

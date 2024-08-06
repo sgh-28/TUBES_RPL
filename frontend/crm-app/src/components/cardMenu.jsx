@@ -41,7 +41,7 @@ function CardMenu({ activeCategory, orderList, setOrderList, query }) {
     }
     setOrderList((prevOrderList) => [
       ...prevOrderList,
-      { ...item, quantity: quantity[item.id_menu] },
+      { id_menu: item.id_menu, harga_menu: item.harga_menu, nama_menu: item.nama_menu, quantity: quantity[item.id_menu] },
     ]);
     setQuantity((prev) => ({ ...prev, [item.id_menu]: "" }));
   };

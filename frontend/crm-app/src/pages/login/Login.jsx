@@ -33,7 +33,7 @@ function Login() {
           } else if (user.role === 'admin') {
               navigate('/admin/');
           } else if (user.role === 'kasir'){
-              navigate('/kasir/');
+              navigate('/kasir/pembayaran');
           } else if (user.role === 'koki'){
               navigate('/koki/');
           }

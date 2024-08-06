@@ -17,11 +17,8 @@ const pesananSchema = new mongoose.Schema({
     type: Number,
     
   },
-  id_menu: {
-    type: String,
-    ref: 'Menu',
-    required: true,
-  },
+  items: []  
+  ,
   no_meja: {
     type: Number,
     ref: 'Meja',
@@ -31,7 +28,16 @@ const pesananSchema = new mongoose.Schema({
     type: Number,
     ref: 'User',
     required: true,
+  },
+  status: {
+    type: String,
+  },
+  jenis_pembayaran:{
+    type:String,
   }
+},{
+  collection: 'pesanan',
+  versionKey: false
 });
 
 // Pre-save hook untuk mengatur no_pesanan secara otomatis

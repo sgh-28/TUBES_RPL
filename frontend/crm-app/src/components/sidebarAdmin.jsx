@@ -60,7 +60,7 @@ function SidebarAdmin({ setActiveCategory }) {
     } else if (location.pathname.startsWith('/kasir/')) {
       return (
         <>
-          <Link className={getLinkClass('/kasir/meja1')} to="/kasir/meja1">Meja 1</Link>
+          <Link className={getLinkClass('/kasir/pembayaran')} to="/kasir/pembayaran">Pembayaran</Link>
         </>
       );
     } else if (location.pathname.startsWith('/koki/')){

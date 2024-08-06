@@ -14,7 +14,7 @@ const useAuth = () => {
       }
     });
 
-    localStorage.removeItem('token');
+    localStorage.clear();
     navigate('/login');
   };
 

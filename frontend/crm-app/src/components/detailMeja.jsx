@@ -15,6 +15,10 @@ function DetailMeja() {
         updateMejaStatus(selectedMeja._id, status);
       };
 
+    const sessionMeja = (id) => {
+        localStorage.setItem("id_menu", id);
+    }
+
     return (
         <div className="flex flex-col px-12 py-6 items-center gap-4">
             <h1 className="text-2xl font-medium">{selectedMeja.nama}</h1>
@@ -40,6 +44,7 @@ function DetailMeja() {
                     </button>
                     <Link
                         to={'/pelayan/menu'}
+                        onClick={sessionMeja(selectedMeja._id)}
                         className="bg-slate-300
                          px-20 py-3 hover:bg-slate-400 text-slate-800 text-lg rounded-lg transition-all duration-300"
                     >

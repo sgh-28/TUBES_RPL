@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useMeja } from '../pages/pelayan/MejaProvider';
+import { useNavigate } from 'react-router-dom';
 
-const RightbarPelayan = ({ orderList, setOrderList, selectedMeja, pelayanNIP }) => {
+const RightbarPelayan = ({ orderList, setOrderList, pelayanNIP, selectedMeja}) => {
+  const navigate = useNavigate();
+
   const handleRemoveOrder = (index) => {
     setOrderList((prevOrderList) => prevOrderList.filter((_, i) => i !== index));
   };
@@ -12,6 +16,7 @@ const RightbarPelayan = ({ orderList, setOrderList, selectedMeja, pelayanNIP }) 
     }
 
     try {
+      console.log(orderList, selectedMeja, pelayanNIP);
       const response = await fetch('http://localhost:3000/api/pesanan', {
         method: 'POST',
         headers: {
@@ -27,6 +32,8 @@ const RightbarPelayan = ({ orderList, setOrderList, selectedMeja, pelayanNIP }) 
       if (response.ok) {
         alert('Pesanan berhasil dikonfirmasi!');
         setOrderList([]); // Clear the order list after successful confirmation
+        localStorage.removeItem('id_menu');
+        navigate('/pelayan/reservasi');
       } else {
         const errorData = await response.json();
         alert(`Gagal mengkonfirmasi pesanan: ${errorData.message}`);

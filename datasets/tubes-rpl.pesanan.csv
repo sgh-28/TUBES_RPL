@@ -1,0 +1,12 @@
+tanggal_pesanan,total_harga,items[0].id_menu,items[1].id_menu,items[2].id_menu,items[3].id_menu,items[0].harga_menu,items[1].harga_menu,items[2].harga_menu,items[3].harga_menu,items[0].nama_menu,items[1].nama_menu,items[2].nama_menu,items[3].nama_menu,items[0].quantity,items[1].quantity,items[2].quantity,items[3].quantity,no_meja,NIP,status,jenis_pembayaran,no_pesanan
+2024-08-06T17:56:32.389Z,47000,MU02,MN01,,,20000,3500,,,Iga Penyet,Air Mineral,,,2,2,,,1,100004,lunas,card,00001
+2024-08-06T18:09:01.772Z,144000,MU02,CM01,CM02,MN01,20000,10000,50000,3500,Iga Penyet,Kue Putu,Donat J.Co,Air Mineral,3,2,1,4,2,100004,lunas,card,00002
+2024-08-06T18:09:34.355Z,50000,MU02,CM01,,,20000,10000,,,Iga Penyet,Kue Putu,,,2,1,,,2,100004,lunas,card,00003
+2024-08-06T18:09:53.456Z,55000,MN01,CM01,,,3500,10000,,,Air Mineral,Kue Putu,,,10,2,,,2,100004,lunas,card,00004
+2024-08-06T18:10:31.069Z,455000,MU02,CM02,MN01,MU02,20000,50000,3500,20000,Iga Penyet,Donat J.Co,Air Mineral,Iga Penyet,4,2,10,12,2,100004,lunas,card,00005
+2024-08-06T18:46:04.916Z,190000,MU02,CM02,,,20000,50000,,,Iga Penyet,Donat J.Co,,,2,3,,,2,100004,lunas,card,00006
+2024-08-06T18:46:19.008Z,278500,MU02,MN01,,,20000,3500,,,Iga Penyet,Air Mineral,,,12,11,,,2,100004,lunas,card,00007
+2024-08-06T18:46:28.768Z,100000,CM02,,,,50000,,,,Donat J.Co,,,,2,,,,2,100004,lunas,card,00008
+2024-08-06T18:46:37.751Z,40000,MU02,,,,20000,,,,Iga Penyet,,,,2,,,,2,100004,lunas,card,00009
+2024-08-06T21:05:12.576Z,43500,MU02,MN01,,,20000,3500,,,Iga Penyet,Air Mineral,,,2,1,,,1,100004,lunas,cash,00010
+2024-08-06T21:05:22.661Z,20000,MU02,,,,20000,,,,Iga Penyet,,,,1,,,,1,100004,berlangsung,,00011

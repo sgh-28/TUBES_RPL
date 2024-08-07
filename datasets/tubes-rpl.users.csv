@@ -1,0 +1,5 @@
+_id,Role,Nama,Password,Tanggal_lahir,Jenis_kelamin,Alamat,No_telp,Tahun_masuk,Pend_terakhir,kewarganegaraan,NIP
+66b260f233c176fa24af5033,admin,Api,password,12-04-2000,Pria,Ciumbeuleuit,02934829124,2024,S1,WNA,100001
+66b261a613c1fd668fee0374,koki,Om Swastiatu Singgih Prasetyo ,password,2004-03-13,Pria,Cikudapateuh,021384139232,2024,SMP,Indonesia,100002
+66b261e213c1fd668fee037a,kasir,Fay Nabila,password,1999-02-13,Wanita,Cicukang,03958240315,2021,S1,Malaysia,100003
+66b2622213c1fd668fee0380,pelayan,Bastian Steel,password,2000-08-05,Pria,Cikampek,024582034,2019,SMA,Batak,100004

@@ -80,14 +80,14 @@ After run the server, insert datasets to mongodb:
 
 ### Insert Data to Mongodb with Mongoimport
 
-if you path /TUBES_RPL/
+if your path /TUBES_RPL/
 ```bash
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file .\datasets\tubes-rpl.users.csv
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file .\datasets\tubes-rpl.meja.csv
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file .\datasets\tubes-rpl.pesanan.csv
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file .\datasets\tubes-rpl.menu.csv
 ```
-if you path /TUBES_RPL/backend/
+if your path /TUBES_RPL/backend/
 ```bash
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file ..\datasets\tubes-rpl.users.csv
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file ..\datasets\tubes-rpl.meja.csv

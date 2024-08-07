@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "66b397d7c95400ea9b48e623"
+  },
+  "tanggal_pesanan": {
+    "$date": "2024-08-07T15:50:47.821Z"
+  },
+  "total_harga": 20000,
+  "items": [
+    {
+      "id_menu": "MU02",
+      "harga_menu": 20000,
+      "nama_menu": "Iga Penyet",
+      "quantity": "1"
+    }
+  ],
+  "no_meja": 1,
+  "NIP": 100004,
+  "status": "lunas",
+  "jenis_pembayaran": "card",
+  "no_pesanan": "00001"
+},
+{
+  "_id": {
+    "$oid": "66b397e0c95400ea9b48e62b"
+  },
+  "tanggal_pesanan": {
+    "$date": "2024-08-07T15:50:56.286Z"
+  },
+  "total_harga": 63500,
+  "items": [
+    {
+      "id_menu": "MU02",
+      "harga_menu": 20000,
+      "nama_menu": "Iga Penyet",
+      "quantity": "3"
+    },
+    {
+      "id_menu": "MN01",
+      "harga_menu": 3500,
+      "nama_menu": "Air Mineral",
+      "quantity": "1"
+    }
+  ],
+  "no_meja": 2,
+  "NIP": 100004,
+  "status": "tagihan",
+  "jenis_pembayaran": "",
+  "no_pesanan": "00002"
+},
+{
+  "_id": {
+    "$oid": "66b397e6c95400ea9b48e635"
+  },
+  "tanggal_pesanan": {
+    "$date": "2024-08-07T15:51:02.492Z"
+  },
+  "total_harga": 60000,
+  "items": [
+    {
+      "id_menu": "MU02",
+      "harga_menu": 20000,
+      "nama_menu": "Iga Penyet",
+      "quantity": "3"
+    }
+  ],
+  "no_meja": 3,
+  "NIP": 100004,
+  "status": "tagihan",
+  "jenis_pembayaran": "",
+  "no_pesanan": "00003"
+}]

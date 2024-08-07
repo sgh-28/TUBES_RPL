@@ -72,7 +72,7 @@ After run the server, insert datasets to mongodb:
 
 #### Table Pesanan
 
-./datasets/tubes-rpl.pesanan.csv
+./datasets/tubes-rpl.pesanan.json
 
 #### Table Menu
 
@@ -84,14 +84,14 @@ if your path /TUBES_RPL/
 ```bash
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file .\datasets\tubes-rpl.users.csv
 mongoimport --db tubes-rpl --collection meja --type csv --headerline --file .\datasets\tubes-rpl.meja.csv
-mongoimport --db tubes-rpl --collection pesanan --type csv --headerline --file .\datasets\tubes-rpl.pesanan.csv
+mongoimport --db tubes-rpl --collection pesanan --file ./datasets/tubes-rpl.pesanan.json --jsonArray
 mongoimport --db tubes-rpl --collection menu --type csv --headerline --file .\datasets\tubes-rpl.menu.csv
 ```
 if your path /TUBES_RPL/backend/
 ```bash
 mongoimport --db tubes-rpl --collection users --type csv --headerline --file ..\datasets\tubes-rpl.users.csv
 mongoimport --db tubes-rpl --collection meja --type csv --headerline --file ..\datasets\tubes-rpl.meja.csv
-mongoimport --db tubes-rpl --collection pesanan --type csv --headerline --file ..\datasets\tubes-rpl.pesanan.csv
+mongoimport --db tubes-rpl --collection pesanan --file ../datasets/tubes-rpl.pesanan.json --jsonArray
 mongoimport --db tubes-rpl --collection menu --type csv --headerline --file ..\datasets\tubes-rpl.menu.csv
 ```
 

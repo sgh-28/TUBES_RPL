@@ -99,12 +99,15 @@ mongoimport --db tubes-rpl --collection menu --type csv --headerline --file ..\d
 ### Admin
 - NIP : 100001
 - Password : password
+
+  ### Koki
+- NIP : 100002
+- Password :  password
+
 ### Kasir
 - NIP : 100003
 - Password : password
-### Koki
-- NIP : 100002
-- Password :  password
+
 ### Pelayan
 - NIP : 100004
 - Password : password

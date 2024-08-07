@@ -23,11 +23,23 @@ Currently, two official plugins are available:
 git clone https://github.com/sgh-28/TUBES_RPL.git
 ```
 
-### Install dependencies
+### Install dependencies backend
 
 You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
 
 ```bash
+cd ./backend/
+
+npm install
+```
+
+### Install dependencies frontend
+
+You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+
+```bash
+cd ./frontend/crm-app
+
 npm install
 ```
 
@@ -44,6 +56,26 @@ cd ./frontend/crm-app/
 
 npm run dev
 ```
+
+### Insert Datasets To Mongodb
+
+After run the server, insert datasets to mongodb:
+
+#### Table Meja
+
+./datasets/tubes-rpl.meja.csv
+
+#### Table Users
+
+./datasets/tubes-rpl.users.csv
+
+#### Table Pesanan
+
+./datasets/tubes-rpl.pesanan.csv
+
+#### Table Menu
+
+./datasets/tubes-rpl.menu.csv
 
 # Account
 ### Admin

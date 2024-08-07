@@ -12,6 +12,7 @@ Currently, two official plugins are available:
 - Express
 - Mongodb
 - Node js
+- Sweetalert2
 
 # How To Use
 

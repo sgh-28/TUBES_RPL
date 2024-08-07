@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 const Adding = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
+
   const [formData, setFormData] = useState({
     Role: '',
     Nama: '',
@@ -73,7 +84,14 @@ const Adding = () => {
       }
 
       const data = await response.json();
-      alert(id ? 'Karyawan berhasil diperbarui' : 'Karyawan berhasil ditambahkan');
+
+      const header = id ? 'Data Diubah!' : 'Data Ditambah!' 
+      const footer = id ? 'Data anda telah diubah': 'Data anda telah berhasil ditambah'
+      swalWithBootstrapButtons.fire(
+        header,
+        footer,
+        'success'
+      );
       navigate('/admin/karyawan');
     } catch (error) {
       alert('Terjadi kesalahan:', error.message);

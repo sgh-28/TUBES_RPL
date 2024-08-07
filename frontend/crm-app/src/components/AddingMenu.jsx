@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AddingMenu = () => {
   const [formDataMenu, setFormDataMenu] = useState({
@@ -10,6 +11,13 @@ const AddingMenu = () => {
   });
   const { id } = useParams(); // Get id from route params
   const navigate = useNavigate();
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
 
   useEffect(() => {
     if (id) {
@@ -61,7 +69,13 @@ const AddingMenu = () => {
       }
 
       const data = await response.json();
-      alert(id ? 'Menu berhasil diperbarui' : 'Menu berhasil ditambahkan');
+      const header = id ? 'Data Diubah!' : 'Data Ditambah!' 
+      const footer = id ? 'Data anda telah diubah': 'Data anda telah berhasil ditambah'
+      swalWithBootstrapButtons.fire(
+        header,
+        footer,
+        'success'
+      );
       navigate('/admin/menu');
     } catch (error) {
       alert('Terjadi kesalahan:', error.message);
@@ -125,7 +139,7 @@ const AddingMenu = () => {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded-md"
+          className="bg-teal-600 text-white px-4 py-2 rounded-md"
         >
           {id ? 'Perbarui' : 'Tambah'}
         </button>

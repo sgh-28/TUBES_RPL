@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function CardPegawai({query}) {
     const [pegawai, setPegawai] = useState([]);
     const [filteredKaryawan, setFilteredKaryawan] = useState([]);
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'button-alert-con ml-1',
+        cancelButton: 'button-alert-can mr-1'
+      },
+      buttonsStyling: false
+    });
 
     const getPegawai = async () =>{
         const response = await fetch('http://localhost:3000/api/users');
@@ -13,26 +22,53 @@ function CardPegawai({query}) {
     }
 
     const handleDelete = async (NIP) => {
-        const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus pegawai ini?");
-        if (!confirmDelete) {
-          return;
-        }
-    
-        try {
-          const response = await fetch(`http://localhost:3000/api/users/${NIP}`, {
-            method: 'DELETE',
-          });
-          
-          if (response.ok) {
-            setPegawai((prevMeja) => prevMeja.filter((item) => item.NIP !== NIP));
-            alert(`Anda Berhasil Menghapus Pegawai Dengan NIP: ${NIP}`);
-          } else {
-            console.error('Failed to delete menu item', error);
+      swalWithBootstrapButtons.fire({
+        title: `Apakah anda yakin ingin menghapus ${NIP}?`,
+        text: "Anda tidak bisa mengembalikannya lagi!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, hapus ini!',
+        cancelButtonText: 'Tidak, batalkan!',
+        reverseButtons: true
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = await fetch(`http://localhost:3000/api/users/${NIP}`, {
+              method: 'DELETE',
+            });
+  
+            if (response.ok) {
+              setPegawai((prevMeja) => prevMeja.filter((item) => item.NIP !== NIP));
+              swalWithBootstrapButtons.fire(
+                'Data Terhapus!',
+                'Data anda telah dihapus.',
+                'success'
+              );
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Terjadi kegagalan!',
+                footer: 'Gagal untuk menghapus pegawai'
+              });
+            }
+          } catch (error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Terjadi kegagalan!',
+              footer: 'Gagal untuk menghapus pegawai'
+            });
           }
-        } catch (error) {
-          console.error('Failed to delete menu item', error);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Batal',
+            'Data pegawai anda aman :)',
+            'error'
+          );
         }
-      };
+      });
+    };
 
     useEffect(()=>{
         getPegawai();

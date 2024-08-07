@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function CardMenu({ activeCategory, orderList, setOrderList, query }) {
   const [menu, setMenu] = useState([]);
@@ -8,6 +9,13 @@ function CardMenu({ activeCategory, orderList, setOrderList, query }) {
   const [filteredMenu, setFilteredMenu] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
 
   const getMenu = async () => {
     try {
@@ -28,15 +36,13 @@ function CardMenu({ activeCategory, orderList, setOrderList, query }) {
     getMenu();
   }, []);
 
-  
-
-  // const filteredMenu = menu.filter(
-  //   (item) => item.jenis_menu === activeCategory
-  // );
-
   const handleAddToOrder = (item) => {
     if (!quantity[item.id_menu] || quantity[item.id_menu] <= 0) {
-      alert("Please enter a valid quantity.");
+      swalWithBootstrapButtons.fire(
+        'Isi Kuantitas!',
+        'Kuantitas yang dimasukkan kosong',
+        'warning'
+      );
       return;
     }
     setOrderList((prevOrderList) => [
@@ -70,27 +76,53 @@ function CardMenu({ activeCategory, orderList, setOrderList, query }) {
   };
 
   const handleDelete = async (id_menu) => {
-    const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus menu ini?");
-    if (!confirmDelete) {
-      return;
-    }
+    swalWithBootstrapButtons.fire({
+      title: `Apakah anda yakin ingin menghapus ${id_menu}?`,
+      text: "Anda tidak bisa mengembalikannya lagi!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, hapus ini!',
+      cancelButtonText: 'Tidak, batalkan!',
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`http://localhost:3000/api/menu/${id_menu}`, {
+            method: 'DELETE',
+          });
 
-    try {
-      const response = await fetch(`http://localhost:3000/api/menu/${id_menu}`, {
-        method: 'DELETE',
-      });
-      
-      if (response.ok) {
-        setMenu((prevMenu) => prevMenu.filter((item) => item.id_menu !== id_menu));
-        alert(`Anda Berhasil Menghapus Menu Dengan ID: ${id_menu}`);
-      } else {
-        console.error('Failed to delete menu item', error);
+          if (response.ok) {
+            setMenu((prevMeja) => prevMeja.filter((item) => item.id_menu !== id_menu));
+            swalWithBootstrapButtons.fire(
+              'Data Terhapus!',
+              'Data menu telah dihapus.',
+              'success'
+            );
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Terjadi kegagalan!',
+              footer: 'Gagal untuk menghapus menu'
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Terjadi kegagalan!',
+            footer: 'Gagal untuk menghapus menu'
+          });
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Batal',
+          'Data menu anda aman :)',
+          'error'
+        );
       }
-    } catch (error) {
-      console.error('Failed to delete menu item', error);
-    }
+    });
   };
-
   const isAdmin = location.pathname.startsWith("/admin");
   const isChef = location.pathname.startsWith("/koki");
 
@@ -166,7 +198,7 @@ function CardMenu({ activeCategory, orderList, setOrderList, query }) {
                   }
                   className="border rounded-md p-1 w-16"
                   placeholder="Qty"
-                  disabled={!availability[item.id_menu]} // Disable input if the item is unavailable
+                  disabled={!availability[item.id_menu]} 
                 />
                 <button
                   className={`ml-2 px-6 py-1 text-center rounded-md transition-all duration-300 ${
@@ -175,7 +207,7 @@ function CardMenu({ activeCategory, orderList, setOrderList, query }) {
                       : "bg-gray-400 cursor-not-allowed"
                   }`}
                   onClick={() => handleAddToOrder(item)}
-                  disabled={!availability[item.id_menu]} // Disable button if the item is unavailable
+                  disabled={!availability[item.id_menu]}
                 >
                   Tambah
                 </button>

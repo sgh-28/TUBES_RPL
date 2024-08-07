@@ -10,6 +10,7 @@ const Pesanan = require('./models/Pesanan');
 const { getTopMenus } = require('./models/topMenus');
 const { getRevenue } = require('./models/getRevenue');
 const { getTransactions } = require('./models/pesananbyMonth');
+const { stat } = require('fs');
 
 const SECRET_KEY = process.env.SECRET_KEY || crypto.randomBytes(64).toString('hex');
 
@@ -61,6 +62,7 @@ module.exports = () =>{
 
     router.post('/meja', async (req, res) => {
         const {nama, status, kapasitas} = req.body;
+        console.log(nama, status, kapasitas);
         try{
             const meja = await Meja.create([{nama, status, kapasitas}]);
             res.json(meja);

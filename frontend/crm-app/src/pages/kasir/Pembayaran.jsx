@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import SidebarAdmin from '../../components/sidebarAdmin';
 import Modal from 'react-modal';
+import Swal from 'sweetalert2';
 
 Modal.setAppElement('#root');
 
@@ -14,6 +15,14 @@ function Pembayaran() {
   const [uangBayar, setUangBayar] = useState("");
   const [kembalian, setKembalian] = useState(0);
   const [totalHarga, setTotalHarga] = useState(0);
+
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
 
   const handleChangeUang = (e) => {
      setUangBayar(e.target.value);
@@ -48,13 +57,39 @@ function Pembayaran() {
 
   const handleBayar = async () => {
     if(jenisPembayaran == ''){
-      alert("Mohon Isi Jenis Pembayaran");
+      swalWithBootstrapButtons.fire(
+        'Pilih Jenis Pembayaran',
+        "Anda belum memilih jenis pembayaran",
+        'warning'
+      );
       return null
+    }
+    if (jenisPembayaran === 'cash'){
+      if(uangBayar == ''){
+        swalWithBootstrapButtons.fire(
+          'Masukkan Nonimal Uang',
+          "Anda belum memasukkan nominal uang",
+          'warning'
+        );
+        return null
+      }
+      if(uangBayar < totalHarga){
+        swalWithBootstrapButtons.fire(
+          'Nominal Uang Kurang',
+          "Nominal uang lebih kecil dari total  harga",
+          'warning'
+        );
+        return null
+      }
     }
 
     console.log(pesanan);
     if(pesanan.length == 0){
-      alert("Meja Ini Belum Ada Pesanan");
+      swalWithBootstrapButtons.fire(
+        'Belum Ada Pesanan',
+        'Pada meja ini belum ada pesanan',
+        'warning'
+      );
       return null
     }
 
@@ -73,7 +108,11 @@ function Pembayaran() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'kosong' })
       });
-      alert("Update Status Pembayaran Berhasil")
+      swalWithBootstrapButtons.fire(
+        'Transaksi Berhasil!',
+        'Transaksi telah berhasil',
+        'success'
+      );
       setModalIsOpen(false);
       getMeja();
     } catch (error) {

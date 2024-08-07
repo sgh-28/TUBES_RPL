@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import SidebarAdmin from '../../components/sidebarAdmin';
+import Swal from 'sweetalert2';
+
 
 const HomeKoki = () => {
   const [dataPesanan, setDataPesanan] = useState([]);
+
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
 
   async function getPesanan(){
     const response = await fetch('http://localhost:3000/api/pesanan')
@@ -17,124 +27,50 @@ const HomeKoki = () => {
   }
 
   async function handleChangeStatus(id){
-    const choice = window.confirm('Apakah Anda Ingin Update Status Pesanan Menjadi Selesai?');
-    if(!choice){
-      return null
-    }
+    
+    swalWithBootstrapButtons.fire({
+      title: `Apakah anda yakin ingin mengkonfirmasi ${id}?`,
+      text: "Anda tidak bisa mengembalikannya lagi!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, konfirmasi!',
+      cancelButtonText: 'Tidak, batalkan!',
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
 
-    try{
-      const response = await fetch(`http://localhost:3000/api/pesanan/${id}`,{
-        method:"PATCH",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({status:"tagihan"}),
-      });
+      try{
+        const response = await fetch(`http://localhost:3000/api/pesanan/${id}`,{
+          method:"PATCH",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({status:"tagihan"}),
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Network response was not ok');
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Network response was not ok');
+        }
+
+        swalWithBootstrapButtons.fire(
+          'Pesanan dikonfirmasi',
+          'Pesanan telah berhasil dikonfirmasi',
+          'success'
+        );
+        const data = await response.json();
+        window.location.reload();
+      }catch(error){
+        console.log("Update Gagal", error)
       }
-
-      const data = await response.json();
-      window.location.reload();
-    }catch(error){
-      console.log("Update Gagal", error)
     }
   }
+)}
 
 
   useEffect(()=>{
     getPesanan();
   })
-  
-  // const orders = [
-  //   {
-  //     id: 1,
-  //     tableNo: 5,
-  //     quantity: 3,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Es Americano", quantity: 1 },
-  //       { name: "Pancake", quantity: 1 }
-  //     ]
-  //   },
-  //   {
-  //     id: 2,
-  //     tableNo: 10,
-  //     quantity: 10,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Baso Tahu", quantity: 1 },
-  //       { name: "Es Teh Tarik", quantity: 2 },
-  //       { name: "Es Campur", quantity: 1 },
-  //       { name: "Tahu Goreng", quantity: 1 },
-  //       { name: "New York Cheese Cake", quantity: 2 },
-  //       { name: "Nasi Padang", quantity: 1 }
-  //     ]
-  //   },
-  //   {
-  //     id: 3,
-  //     tableNo: 5,
-  //     quantity: 3,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Es Americano", quantity: 1 },
-  //       { name: "Pancake", quantity: 1 }
-  //     ]
-  //   },
-  //   {
-  //     id: 4,
-  //     tableNo: 5,
-  //     quantity: 3,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Es Americano", quantity: 1 },
-  //       { name: "Pancake", quantity: 1 }
-  //     ]
-  //   },
-  //   {
-  //     id: 5,
-  //     tableNo: 5,
-  //     quantity: 3,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Es Americano", quantity: 1 },
-  //       { name: "Pancake", quantity: 1 }
-  //     ]
-  //   },
-  //   {
-  //     id: 6,
-  //     tableNo: 5,
-  //     quantity: 3,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Es Americano", quantity: 1 },
-  //       { name: "Pancake", quantity: 1 }
-  //     ]
-  //   },
-  //   {
-  //     id: 7,
-  //     tableNo: 5,
-  //     quantity: 3,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Es Americano", quantity: 1 },
-  //       { name: "Pancake", quantity: 1 }
-  //     ]
-  //   },
-  //   {
-  //     id: 8,
-  //     tableNo: 5,
-  //     quantity: 3,
-  //     items: [
-  //       { name: "Gado-Gado", quantity: 1 },
-  //       { name: "Es Americano", quantity: 1 },
-  //       { name: "Pancake", quantity: 1 }
-  //     ]
-  //   },
-  // ];
-
 
   return (
     <div className='flex flex-col h-screen w-full overflow-hidden'>

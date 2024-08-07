@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function CardMeja({query}) {
     const [meja, setMeja] = useState([]);
     const [filteredMeja, setFilteredMeja] = useState([]);
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'button-alert-con ml-1',
+        cancelButton: 'button-alert-can mr-1'
+      },
+      buttonsStyling: false
+    });
 
     const getMeja = async () =>{
         const response = await fetch('http://localhost:3000/api/meja');
@@ -13,26 +22,53 @@ function CardMeja({query}) {
     }
 
     const handleDelete = async (_id) => {
-        const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus meja ini?");
-        if (!confirmDelete) {
-          return;
-        }
-    
+    swalWithBootstrapButtons.fire({
+      title: `Apakah anda yakin ingin menghapus ${_id}?`,
+      text: "Anda tidak bisa mengembalikannya lagi!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, hapus ini!',
+      cancelButtonText: 'Tidak, batalkan!',
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
         try {
           const response = await fetch(`http://localhost:3000/api/meja/${_id}`, {
             method: 'DELETE',
           });
-          
+
           if (response.ok) {
             setMeja((prevMeja) => prevMeja.filter((item) => item._id !== _id));
-            alert(`Anda Berhasil Menghapus Meja Dengan ID: ${_id}`);
+            swalWithBootstrapButtons.fire(
+              'Data Terhapus!',
+              'Data meja telah dihapus.',
+              'success'
+            );
           } else {
-            console.error('Failed to delete menu item', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Terjadi kegagalan!',
+              footer: 'Gagal untuk menghapus meja'
+            });
           }
         } catch (error) {
-          console.error('Failed to delete menu item', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Terjadi kegagalan!',
+            footer: 'Gagal untuk menghapus meja'
+          });
         }
-      };
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Batal',
+          'Data meja anda aman :)',
+          'error'
+        );
+      }
+    });
+  };
 
     useEffect(()=>{
         getMeja();

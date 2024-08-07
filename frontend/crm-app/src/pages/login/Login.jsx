@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
-
-
-
+import Swal from 'sweetalert2';
 
 function Login() {
 
   const [NIP, setNIP] = useState('');
   const [Password, setPassword] = useState('');
   const navigate = useNavigate();
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
 
   const handleLogin = async (e) => {
       e.preventDefault();
@@ -38,7 +43,11 @@ function Login() {
               navigate('/koki/');
           }
       } else {
-          alert(data.message);
+        swalWithBootstrapButtons.fire(
+          'NIP atau Password Salah!',
+          'NIP atau password yang dimasukkan salah',
+          'warning'
+        );
       }
     };
 

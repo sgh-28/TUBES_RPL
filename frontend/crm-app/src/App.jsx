@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/home/Home';
+// import Home from './pages/home/Home';
 import Pelayan from './pages/pelayan/Reservasi';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/login/Login';
@@ -23,7 +23,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path='/' exact element={<LandingPage />} />
-        <Route path='/dashboard' exact element={<Home />} />
+        {/* <Route path='/dashboard' exact element={<Home />} /> */}
         <Route path='/login' exact element={<Login />} />
         
         <Route 

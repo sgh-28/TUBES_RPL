@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useMeja } from '../pages/pelayan/MejaProvider';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const RightbarPelayan = ({ orderList, setOrderList, pelayanNIP, selectedMeja}) => {
   const navigate = useNavigate();
+
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
 
   const handleRemoveOrder = (index) => {
     setOrderList((prevOrderList) => prevOrderList.filter((_, i) => i !== index));
   };
 
   const handleConfirmOrder = async () => {
-    if (orderList.length === 0) {
-      alert('Tidak ada pesanan untuk dikonfirmasi.');
-      return;
-    }
-
     try {
       console.log(orderList, selectedMeja, pelayanNIP);
       const response = await fetch('http://localhost:3000/api/pesanan', {
@@ -30,7 +34,12 @@ const RightbarPelayan = ({ orderList, setOrderList, pelayanNIP, selectedMeja}) =
       });
 
       if (response.ok) {
-        alert('Pesanan berhasil dikonfirmasi!');
+        // alert('Pesanan berhasil dikonfirmasi!');
+        swalWithBootstrapButtons.fire(
+          'Data dikonfirmasi',
+          'Data telah berhasil dikonfirmasi',
+          'success'
+        );
         setOrderList([]); // Clear the order list after successful confirmation
         localStorage.removeItem('id_menu');
         navigate('/pelayan/reservasi');

@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AddingMeja = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'button-alert-con ml-1',
+        cancelButton: 'button-alert-can mr-1'
+      },
+      buttonsStyling: false
+    });
+
     const [formDataMeja, setFormDataMeja] = useState({
         _id: 0,
         nama: '',
@@ -58,7 +68,13 @@ const AddingMeja = () => {
           }
     
           const data = await response.json();
-          alert(id ? 'Menu berhasil diperbarui' : 'Menu berhasil ditambahkan');
+          const header = id ? 'Data Diubah!' : 'Data Ditambah!' 
+          const footer = id ? 'Data anda telah diubah': 'Data anda telah berhasil ditambah'
+          swalWithBootstrapButtons.fire(
+            header,
+            footer,
+            'success'
+          );
           navigate('/admin/meja');
         } catch (error) {
           alert('Terjadi kesalahan:', error.message);
@@ -69,16 +85,6 @@ const AddingMeja = () => {
       <div className="p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold mb-6">{id ? 'Edit Meja' : 'Tambah Meja'}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* <div className='flex flex-col'>
-            <label className="mb-1 text-gray-700" htmlFor='id'>ID</label>
-            <input 
-            type="text" 
-            name="_id"
-            placeholder='id'
-            value={formDataMeja._id}
-            onChange={handleChange}
-            className='border border-gray-300 rounded-md p-2'/>
-          </div> */}
     
           <div className='flex flex-col'>
             <label className="mb-1 text-gray-700" htmlFor='nama'>Nama</label>
@@ -92,7 +98,6 @@ const AddingMeja = () => {
           </div>
     
           <div className='flex flex-col'>
-            {/* <label className="mb-1 text-gray-700" htmlFor='status'>status</label> */}
             <input
               hidden
               name="status"
